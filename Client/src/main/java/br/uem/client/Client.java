@@ -78,12 +78,21 @@ public class Client implements ClientInterface {
 	}
 
 	public void sendMessage(String buffer) throws IOException {
-
 		logger.info("Cliente enviando mensagem: " + buffer);
 		outputMessage.write(buffer + "\n");
 		outputMessage.flush();
 	}
 
+	public void flush() throws IOException {
+		outputMessage.flush();
+	}
+
+	public void sendMessageWithoutFlush(String buffer) throws IOException {
+		logger.info("Cliente enviando mensagem: " + buffer);
+		outputMessage.write(buffer + "\n");
+	}
+
+	
 	public String getMessage() throws IOException {
 
 		String buffer = inputMessage.readLine();

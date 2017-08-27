@@ -14,7 +14,7 @@ public class App {
 
 	private static Logger logger = Logger.getLogger(App.class);
 	private static int PORT = 3000;
-	
+
 	public static void main(String args[]) throws Exception {
 
 		Server server = new Server(ServerSocketFactory.getDefault(), App.PORT);
@@ -27,24 +27,21 @@ public class App {
 		}
 
 		OperationRunner operationRunner = new OperationRunner() {
-			
+
 			@Override
 			public void execute(Server server) throws Exception {
-				logger.info("mensagem enviada pelo cliente "+server.getMessage());
-				logger.info("mensagem enviada pelo cliente "+server.getMessage());
-				logger.info("mensagem enviada pelo cliente "+server.getMessage());
-				logger.info("mensagem enviada pelo cliente "+server.getMessage());
-				logger.info("mensagem enviada pelo cliente "+server.getMessage());
-				logger.info("mensagem enviada pelo cliente "+server.getMessage());
-				logger.info("mensagem enviada pelo cliente "+server.getMessage());
-				logger.info("mensagem enviada pelo cliente "+server.getMessage());
+				int cont = 0;
+				while (server.isOpen()) {
+					logger.info(String.format("mensagem %d enviada pelo cliente %s", ++cont, server.getMessage()));
+				}
+
 			}
-			
+
 		};
-		
+
 		ServerRunner serverRunner = new ServerRunner(operationRunner);
 		serverRunner.forever(server);
-		
+
 	}
 
 }

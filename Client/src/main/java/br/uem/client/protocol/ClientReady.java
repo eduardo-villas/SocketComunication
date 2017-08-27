@@ -29,11 +29,10 @@ public class ClientReady implements ClientState {
 	public void doComunication() throws InvalidClientStateException, IOException {
 		try {
 			this.client.getOperationRunner().execute(this.client);
+			this.client.setState(new ClientSayGoodbye(this.client));
 		} catch (Exception e) {
 			logger.error("Erro na execução da operação do cliente", e);
-		} finally {
-			this.client.setState(new ClientSayGoodbye(this.client));
-		}
+		} 
 	}
 
 }
