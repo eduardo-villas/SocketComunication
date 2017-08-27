@@ -23,7 +23,7 @@ public class App {
 			@Override
 			public void execute(Client client) throws Exception {
 				String message = "mensagem do cliente";
-
+				
 				logger.info("enviando mensagem " + message);
 				client.sendMessage(message);
 

@@ -13,6 +13,7 @@ import javax.net.ServerSocketFactory;
 
 import org.apache.log4j.Logger;
 
+import br.uem.server.protocoll.ConnectionIsClose;
 import br.uem.server.protocoll.InvalidServerStateException;
 import br.uem.server.protocoll.ServerState;
 import br.uem.server.protocoll.ServerStoped;
@@ -82,7 +83,14 @@ public class Server implements ServerInterface {
 	}
 	
 	public String getMessage() throws IOException {
-		return inputMessage.readLine();
+		String message = inputMessage.readLine();
+		if (isGoodbye(message))
+			throw new ConnectionIsClose();
+		return message;
+	}
+
+	private boolean isGoodbye(String message) {
+		return "GOODBYE".equals(message);
 	}
 
 	public void initializeIOBuffers() throws IOException {

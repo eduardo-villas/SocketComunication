@@ -36,6 +36,8 @@ public class App {
 				logger.info("mensagem enviada pelo cliente "+server.getMessage());
 				logger.info("mensagem enviada pelo cliente "+server.getMessage());
 				logger.info("mensagem enviada pelo cliente "+server.getMessage());
+				logger.info("mensagem enviada pelo cliente "+server.getMessage());
+				logger.info("mensagem enviada pelo cliente "+server.getMessage());
 			}
 			
 		};

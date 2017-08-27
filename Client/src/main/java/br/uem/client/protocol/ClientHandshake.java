@@ -14,10 +14,10 @@ public class ClientHandshake implements ClientState {
 	public ClientHandshake(Client client) {
 		this.client = client;
 	}
-	
+
 	@Override
 	public void runClient() throws InvalidClientStateException {
-		
+
 	}
 
 	void read() throws InvalidClientStateException, IOException {
@@ -28,6 +28,7 @@ public class ClientHandshake implements ClientState {
 			this.client.setState(new ClientClosed());
 			return;
 		}
+		
 		client.setState(new ClientReady(client));
 	}
 
