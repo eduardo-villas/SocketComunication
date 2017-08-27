@@ -21,6 +21,11 @@ public abstract class ServerGoodbye implements ServerState {
 
 	}
 
+	public void close() throws InvalidServerStateException {
+		server.closeResources();
+		server.setState(new ServerWaiting(server));
+	}
+
 	@Override
 	public boolean isOpen() throws InvalidServerStateException {
 		Socket socket = server.getSocket();

@@ -20,9 +20,4 @@ public class ServerSayGoodbye extends ServerGoodbye {
 		close();
 	}
 
-	public void close() throws InvalidServerStateException {
-		server.closeResources();
-		server.setState(new ServerWaiting(server));
-	}
-
 }
