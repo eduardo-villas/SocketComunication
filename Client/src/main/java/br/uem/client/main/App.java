@@ -25,7 +25,7 @@ public class App {
 			public void execute(Client client) throws Exception {
 				
 				String message = "8bytesMS";
-				final int SIZE_PACKAGE = 4096*2;
+				final int SIZE_PACKAGE = 1024*4;
 				final String TAG = "pack"+SIZE_PACKAGE; 
 				
 				long start = now();
