@@ -1,7 +1,7 @@
 package br.uem.client.main;
 
 import java.io.IOException;
-import java.util.Calendar;
+import java.util.Collections;
 
 import org.apache.log4j.Logger;
 
@@ -24,38 +24,50 @@ public class App {
 			@Override
 			public void execute(Client client) throws Exception {
 				
-				String message = "8bytesMS";
+				final int SIZE_MESSAGE = 8*8;
+				String message = String.join("", Collections.nCopies(SIZE_MESSAGE/8, "8bytesMS"));;
 				final int SIZE_PACKAGE = 1024*4;
-				final String TAG = "pack"+SIZE_PACKAGE; 
+				final String TAG = "packet"+SIZE_PACKAGE; 
+				ElapTime elapTime = new ElapTime();
 				
-				long start = now();
 				int TOTAL_MESSAGES = 100000;
 				
+				long timeWithoutPacket = 0 ;
 				for (int i = 0 ;i < TOTAL_MESSAGES; ++i) {
 					logger.info(String.format("enviando mensagem %d: %s", i+1, message));
+					elapTime.start();
 					client.sendMessage(message);
+					elapTime.finish();
+					timeWithoutPacket += elapTime.elapTime();
 				}
-				long finish = now();
-				logger.info(String.format("tempo de transmissao sem agregacao TAG:%s %d",TAG, finish - start));
+				elapTime.finish();
+				logger.info(String.format("tempo de transmissao sem agregacao TAG:%s %d",TAG, timeWithoutPacket));
 				
-				start = now();
+				long timeWithPacket = 0;
 				StringBuilder sb = new StringBuilder();
 				for (int i = 0 ;i < TOTAL_MESSAGES; ++i) {
 					logger.info(String.format("enviando mensagem %d: %s", i+1, message));
 					sb.append(message);
-					if ((i+1) * 8 == 2048) {
+					if (sb.length() >= SIZE_PACKAGE) {
+						logger.info(String.format("Tamanho do pacote enviado %s", sb.length()));
+						elapTime.start();
 						client.sendMessage(sb.toString());
+						elapTime.finish();
+						timeWithPacket += elapTime.elapTime();
 						sb = new StringBuilder();
 					}
 				}
-				client.sendMessage(sb.toString());
-				finish = now();
-				logger.info(String.format("tempo de transmissao com agregacao TAG:%s %d",TAG, finish - start));
+				if (!sb.toString().isEmpty()) {
+					logger.info(String.format("Tamanho do pacote enviado %s", sb.length()));
+					elapTime.start();
+					client.sendMessage(sb.toString());
+					elapTime.finish();
+					timeWithPacket += elapTime.elapTime();
+				}
 				
-			}
-
-			private long now() {
-				return Calendar.getInstance().getTime().getTime();
+				elapTime.finish();
+				logger.info(String.format("tempo de transmissao com agregacao TAG:%s %d",TAG, timeWithPacket));
+				
 			}
 
 		};
