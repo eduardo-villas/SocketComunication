@@ -1,6 +1,9 @@
 package br.uem.client.main;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.Collections;
 
 import org.apache.log4j.Logger;
@@ -32,6 +35,7 @@ public class App {
 				
 				int TOTAL_MESSAGES = 100000;
 				
+				PrintWriter printWriter = new PrintWriter(new File("stats.txt"));
 				long timeWithoutPacket = 0 ;
 				for (int i = 0 ;i < TOTAL_MESSAGES; ++i) {
 					logger.info(String.format("enviando mensagem %d: %s", i+1, message));
@@ -65,6 +69,10 @@ public class App {
 					timeWithPacket += elapTime.elapTime();
 				}
 				
+
+				printWriter.write("Test\n");
+				printWriter.flush();
+				printWriter.close();
 				elapTime.finish();
 				logger.info(String.format("tempo de transmissao com agregacao TAG:%s %d",TAG, timeWithPacket));
 				
