@@ -78,7 +78,7 @@ public class Client implements ClientInterface {
 	}
 
 	public void sendMessage(String buffer) throws IOException {
-		logger.info("Cliente enviando mensagem: " + buffer);
+//		logger.info("Cliente enviando mensagem: " + buffer);
 		outputMessage.write(buffer + "\n");
 		outputMessage.flush();
 	}
