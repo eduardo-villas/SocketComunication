@@ -14,7 +14,10 @@ public class ElapTime {
 	}
 	
 	public long elapTime() {
-		return (finish - start)/1000;
+		return (finish - start);
 	}
 	
+	public static long toMiliseconds(long nanoseconds) {
+		return nanoseconds / 1000000;
+	}
 }

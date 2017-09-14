@@ -1,1 +1,37 @@
-Test
+Teste 1 
+Teste 1 
+Teste
+Quantidade de mensagens 100000 bytes
+Tamanho das mensagens 64 bytes
+Tamanho dos pacotes 4096 bytes
+Tempo de transmissão em milisegundos sem agregação 412150
+Tempo de transmissão em milisegundos com agregação 35695
+Percentual de  -100.000000
+Teste
+Quantidade de mensagens 100000 bytes
+Tamanho das mensagens 64 bytes
+Tamanho dos pacotes 4096 bytes
+Tempo de transmissão em milisegundos sem agregação 10
+Tempo de transmissão em milisegundos com agregação 4
+Percentual de  -100.000000
+Teste
+Quantidade de mensagens 10.
+Tamanho das mensagens 64 bytes
+Tamanho dos pacotes 4096 bytes
+Tempo de transmissão em milisegundos sem agregação 0
+Tempo de transmissão em milisegundos com agregação 0
+Percentual de  100.000000
+Teste
+Quantidade de mensagens 500000.
+Tamanho das mensagens 64 bytes
+Tamanho dos pacotes 4096 bytes
+Tempo de transmissão em milisegundos sem agregação 5
+Tempo de transmissão em milisegundos com agregação 9
+Percentual de  100.000000
+Teste
+Quantidade de mensagens 500000.
+Tamanho das mensagens 64 bytes
+Tamanho dos pacotes 4096 bytes
+Tempo de transmissão em milisegundos sem agregação 2151770616
+Tempo de transmissão em milisegundos com agregação 178130753
+Percentual de  100.000000

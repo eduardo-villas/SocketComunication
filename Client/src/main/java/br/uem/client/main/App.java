@@ -1,12 +1,15 @@
 package br.uem.client.main;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Collections;
+import java.util.List;
 
 import org.apache.log4j.Logger;
+
+import com.google.common.collect.Lists;
 
 import br.uem.client.Client;
 import br.uem.client.ClientRunner;
@@ -33,9 +36,10 @@ public class App {
 				final String TAG = "packet"+SIZE_PACKAGE; 
 				ElapTime elapTime = new ElapTime();
 				
-				int TOTAL_MESSAGES = 100000;
+				final int TOTAL_MESSAGES = 500000;
 				
-				PrintWriter printWriter = new PrintWriter(new File("stats.txt"));
+				PrintWriter printWriter = new PrintWriter(new FileWriter("stats.txt", true));
+				
 				long timeWithoutPacket = 0 ;
 				for (int i = 0 ;i < TOTAL_MESSAGES; ++i) {
 					logger.info(String.format("enviando mensagem %d: %s", i+1, message));
@@ -69,8 +73,19 @@ public class App {
 					timeWithPacket += elapTime.elapTime();
 				}
 				
-
-				printWriter.write("Test\n");
+				List<String> stats;
+				long perc = ((timeWithPacket/timeWithoutPacket)*100);
+				stats = Lists.newArrayList("Teste",
+						String.format("Quantidade de mensagens %s.", TOTAL_MESSAGES),
+						String.format("Tamanho das mensagens %s bytes", SIZE_MESSAGE),
+						String.format("Tamanho dos pacotes %s bytes", SIZE_PACKAGE),
+						String.format("Tempo de transmissão em milisegundos sem agregação %s", ElapTime.toMiliseconds(timeWithoutPacket)),
+						String.format("Tempo de transmissão em milisegundos com agregação %s", ElapTime.toMiliseconds(timeWithPacket)),
+						String.format("Percentual de  %f%5", perc)
+						);
+				
+				stats.stream().map(a -> a + "\n").forEach(printWriter::write);
+				
 				printWriter.flush();
 				printWriter.close();
 				elapTime.finish();
