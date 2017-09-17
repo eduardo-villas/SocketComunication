@@ -18,6 +18,7 @@ import br.uem.client.protocol.InvalidClientStateException;
 public class App {
 
 	private static final int SERVER_PORT = 3000;
+//	private static final String SERVER_IP = "54.186.97.210";
 	private static final String SERVER_IP = "localhost";
 
 	private static Logger logger = Logger.getLogger(App.class);
@@ -29,7 +30,8 @@ public class App {
 			@Override
 			public void execute(Client client) throws Exception {
 				
-				final int transferInMB = 500;
+				final int transferInMB = 10;
+				
 				sendBytes(client, 32, 1, transferInMB);
 				sendBytes(client, 32, 2, transferInMB);
 				sendBytes(client, 32, 4, transferInMB);
@@ -61,9 +63,10 @@ public class App {
 				final int TOTAL_MESSAGES = (transferInMB * (1024*1024)) / SIZE_MESSAGE;
 				final int MB_TRANSFER = (TOTAL_MESSAGES *  SIZE_MESSAGE) / (1024*1024);// QUANTIDADE EM MB para mensagens de 32 bytes 50mb
 				
-				PrintWriter printWriter = new PrintWriter(new FileWriter("stats.log", true));
+				PrintWriter printWriter = new PrintWriter(new FileWriter("stats5.log", true));
 				ElapTime elapTimeTotal = new ElapTime();
 				long timeTransferWithoutPacket = 0 ;
+				client.sendMessage(String.format("TestKey:type=%s: sizemessage=%d: packet=%d", "withoutpacket", SIZE_MESSAGE, SIZE_PACKAGE));
 				elapTimeTotal.start();
 				for (int i = 0 ;i < TOTAL_MESSAGES; ++i) {
 					logger.info(String.format("enviando mensagem sem agregação %d: %s", i+1, message));
@@ -79,6 +82,7 @@ public class App {
 				
 				long timeTransferWithPacket = 0;
 				elapTimeTotal.start();
+				client.sendMessage(String.format("TestKey:type=   %s: sizemessage=%d: packet=%d", "withpacket", SIZE_MESSAGE, SIZE_PACKAGE));
 				StringBuilder sb = new StringBuilder();
 				for (int i = 0 ;i < TOTAL_MESSAGES; ++i) {
 					logger.info(String.format("enviando mensagem com agregação %d: %s", i+1, message));
@@ -107,22 +111,24 @@ public class App {
 				stats = Lists.newArrayList("\nTeste",
 						
 						String.format("Quantidade de mensagens %s.", TOTAL_MESSAGES),
-						String.format("Tamanho das mensagens %s bytes", SIZE_MESSAGE),
-						String.format("Tamanho dos pacotes %s bytes", SIZE_PACKAGE),
+						String.format("Tamanho das mensagens %s bytes **", SIZE_MESSAGE),
+						String.format("Tamanho dos pacotes %s bytes **", SIZE_PACKAGE),
 						String.format("Total transferido %s MB", MB_TRANSFER),
 						
-						String.format("Tempo de transmissão em milisegundos sem agregação   %s", ElapTime.toMiliseconds(timeTransferWithoutPacket)),
-						String.format("Tempo de transmissão em nanosegundos sem agregação   %s", timeTransferWithoutPacket),
-						String.format("Tempo total em milisegundos sem agregação            %s", ElapTime.toMiliseconds(totalTimeWithoutPacket)),
-						String.format("Tempo total em nanosegundos sem agregação            %s", totalTimeWithoutPacket),
-						String.format("Tempo de transmissão em milisegundos com agregação   %s", ElapTime.toMiliseconds(timeTransferWithPacket)),
-						String.format("Tempo de transmissão em nanosegundos com agregação   %s", timeTransferWithPacket),
-						String.format("Tempo de total em milisegundos com agregação         %s", ElapTime.toMiliseconds(totalTimeWithPacket)),
-						String.format("Tempo de total em nanosegundos com agregação         %s", totalTimeWithPacket),
-						
+						"\nSEM AGREGAÇÃO",
+						String.format("Tempo de transmissão em milisegundos agregação   %s", ElapTime.toMiliseconds(timeTransferWithoutPacket)),
+						String.format("Tempo de transmissão em nanosegundos agregação   %s", timeTransferWithoutPacket),
+						String.format("Tempo total em milisegundos agregação            %s", ElapTime.toMiliseconds(totalTimeWithoutPacket)),
+						String.format("Tempo total em nanosegundos agregação            %s", totalTimeWithoutPacket),
+						"\nCOM AGREGAÇÃO",
+						String.format("Tempo de transmissão em milisegundos agregação   %s", ElapTime.toMiliseconds(timeTransferWithPacket)),
+						String.format("Tempo de transmissão em nanosegundos agregação   %s", timeTransferWithPacket),
+						String.format("Tempo de total em milisegundos agregação         %s", ElapTime.toMiliseconds(totalTimeWithPacket)),
+						String.format("Tempo de total em nanosegundos agregação         %s", totalTimeWithPacket),
+						"\nPERCENTUAL DE DESEMPENHO",
 						String.format("Percentual transferencia                            %4.3f", ((new Double(timeTransferWithPacket)/new Double(timeTransferWithoutPacket) * 100) - 100)),
-						String.format("Percentual total                                    %4.3f", ((new Double(totalTimeWithPacket)/new Double(totalTimeWithoutPacket) * 100) - 100))
-						);
+						String.format("Percentual total                                    %4.3f", ((new Double(totalTimeWithPacket)/new Double(totalTimeWithoutPacket) * 100) - 100)),
+						"----------------------------------------------------------\n");
 				
 				stats.stream().map(a -> a + "\n").forEach(printWriter::write);
 				
