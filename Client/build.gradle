@@ -11,6 +11,8 @@ apply plugin: 'application'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
+mainClassName = 'br.uem.client.main.App'
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
