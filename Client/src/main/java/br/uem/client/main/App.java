@@ -18,8 +18,8 @@ import br.uem.client.protocol.InvalidClientStateException;
 public class App {
 
 	private static final int SERVER_PORT = 3000;
-//	private static final String SERVER_IP = "54.186.97.210";
-	private static final String SERVER_IP = "localhost";
+	private static final String SERVER_IP = "54.186.97.210";
+//	private static final String SERVER_IP = "localhost";
 
 	private static Logger logger = Logger.getLogger(App.class);
 
@@ -54,7 +54,8 @@ public class App {
 
 			private void sendBytes(Client client, final int SIZE_MESSAGE, final int multiplyPacket, final int transferInMB) throws IOException {
 				
-				String message = String.join("", Collections.nCopies(SIZE_MESSAGE/8, "8bytesMS"));;
+				String cabecalho = String.join("", Collections.nCopies(2, "8bytesMS"));
+				String message = String.join("", Collections.nCopies(SIZE_MESSAGE/8, "8bytesMS"));
 				final int SIZE_PACKAGE = 1024*multiplyPacket;
 				final String TAG = "packet"+SIZE_PACKAGE; 
 				ElapTime elapTime = new ElapTime();
@@ -63,7 +64,7 @@ public class App {
 				final int TOTAL_MESSAGES = (transferInMB * (1024*1024)) / SIZE_MESSAGE;
 				final int MB_TRANSFER = (TOTAL_MESSAGES *  SIZE_MESSAGE) / (1024*1024);// QUANTIDADE EM MB para mensagens de 32 bytes 50mb
 				
-				PrintWriter printWriter = new PrintWriter(new FileWriter("stats5.log", true));
+				PrintWriter printWriter = new PrintWriter(new FileWriter("stats10.log", true));
 				ElapTime elapTimeTotal = new ElapTime();
 				long timeTransferWithoutPacket = 0 ;
 				client.sendMessage(String.format("TestKey:type=%s: sizemessage=%d: packet=%d", "withoutpacket", SIZE_MESSAGE, SIZE_PACKAGE));
@@ -71,7 +72,7 @@ public class App {
 				for (int i = 0 ;i < TOTAL_MESSAGES; ++i) {
 					logger.info(String.format("enviando mensagem sem agregação %d: %s", i+1, message));
 					elapTime.start();
-					client.sendMessage(message);
+					client.sendMessage(cabecalho+message);
 					elapTime.finish();
 					timeTransferWithoutPacket += elapTime.elapTime();
 				}
@@ -90,7 +91,7 @@ public class App {
 					if (sb.length() >= SIZE_PACKAGE) {
 						logger.info(String.format("Tamanho do pacote enviado %s", sb.length()));
 						elapTime.start();
-						client.sendMessage(sb.toString());
+						client.sendMessage(cabecalho+sb.toString());
 						elapTime.finish();
 						timeTransferWithPacket += elapTime.elapTime();
 						sb = new StringBuilder();
@@ -99,7 +100,7 @@ public class App {
 				if (!sb.toString().isEmpty()) {
 					logger.info(String.format("Tamanho do pacote enviado %s", sb.length()));
 					elapTime.start();
-					client.sendMessage(sb.toString());
+					client.sendMessage(cabecalho+sb.toString());
 					elapTime.finish();
 					timeTransferWithPacket += elapTime.elapTime();
 				}
