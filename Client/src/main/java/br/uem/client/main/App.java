@@ -30,7 +30,7 @@ public class App {
 			@Override
 			public void execute(Client client) throws Exception {
 				
-				final int transferInMB = 10;
+				final int transferInMB = 1;
 				
 				sendBytes(client, 32, 1, transferInMB);
 				sendBytes(client, 32, 2, transferInMB);
@@ -54,7 +54,7 @@ public class App {
 
 			private void sendBytes(Client client, final int SIZE_MESSAGE, final int multiplyPacket, final int transferInMB) throws IOException {
 				
-				String cabecalho = String.join("", Collections.nCopies(2, "8bytesMS"));
+				String cabecalho = String.join("", Collections.nCopies(3, "8bytesMS"));
 				String message = String.join("", Collections.nCopies(SIZE_MESSAGE/8, "8bytesMS"));
 				final int SIZE_PACKAGE = 1024*multiplyPacket;
 				final String TAG = "packet"+SIZE_PACKAGE; 
