@@ -1,4 +1,4 @@
-package br.uem.client.main;
+package br.uem.server.main;
 
 public class ElapTime {
 	

@@ -1,0 +1,360 @@
+
+Teste
+Quantidade de mensagens 32768.
+Tamanho das mensagens 32 bytes **
+Tamanho dos pacotes 1024 bytes **
+Total transferido 1 MB
+
+SEM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   2363
+Tempo de transmissão em nanosegundos agregação   2363730625
+Tempo total em milisegundos agregação            2698
+Tempo total em nanosegundos agregação            2698413823
+
+COM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   1104
+Tempo de transmissão em nanosegundos agregação   1104543566
+Tempo de total em milisegundos agregação         1442
+Tempo de total em nanosegundos agregação         1442281205
+
+PERCENTUAL DE DESEMPENHO
+Percentual transferencia                            -53.271
+Percentual total                                    -46.551
+----------------------------------------------------------
+
+
+Teste
+Quantidade de mensagens 32768.
+Tamanho das mensagens 32 bytes **
+Tamanho dos pacotes 2048 bytes **
+Total transferido 1 MB
+
+SEM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   1467
+Tempo de transmissão em nanosegundos agregação   1467484554
+Tempo total em milisegundos agregação            1647
+Tempo total em nanosegundos agregação            1647442608
+
+COM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   1617
+Tempo de transmissão em nanosegundos agregação   1617334853
+Tempo de total em milisegundos agregação         1730
+Tempo de total em nanosegundos agregação         1730598618
+
+PERCENTUAL DE DESEMPENHO
+Percentual transferencia                            10.211
+Percentual total                                    5.048
+----------------------------------------------------------
+
+
+Teste
+Quantidade de mensagens 32768.
+Tamanho das mensagens 32 bytes **
+Tamanho dos pacotes 4096 bytes **
+Total transferido 1 MB
+
+SEM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   1436
+Tempo de transmissão em nanosegundos agregação   1436765439
+Tempo total em milisegundos agregação            1540
+Tempo total em nanosegundos agregação            1540005069
+
+COM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   1559
+Tempo de transmissão em nanosegundos agregação   1559131594
+Tempo de total em milisegundos agregação         1629
+Tempo de total em nanosegundos agregação         1629490851
+
+PERCENTUAL DE DESEMPENHO
+Percentual transferencia                            8.517
+Percentual total                                    5.811
+----------------------------------------------------------
+
+
+Teste
+Quantidade de mensagens 32768.
+Tamanho das mensagens 32 bytes **
+Tamanho dos pacotes 8192 bytes **
+Total transferido 1 MB
+
+SEM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   2064
+Tempo de transmissão em nanosegundos agregação   2064110342
+Tempo total em milisegundos agregação            2160
+Tempo total em nanosegundos agregação            2160890339
+
+COM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   2004
+Tempo de transmissão em nanosegundos agregação   2004711060
+Tempo de total em milisegundos agregação         4917
+Tempo de total em nanosegundos agregação         4917051081
+
+PERCENTUAL DE DESEMPENHO
+Percentual transferencia                            -2.878
+Percentual total                                    127.547
+----------------------------------------------------------
+
+
+Teste
+Quantidade de mensagens 32768.
+Tamanho das mensagens 32 bytes **
+Tamanho dos pacotes 16384 bytes **
+Total transferido 1 MB
+
+SEM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   1013
+Tempo de transmissão em nanosegundos agregação   1013543157
+Tempo total em milisegundos agregação            1540
+Tempo total em nanosegundos agregação            1540326037
+
+COM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   1577
+Tempo de transmissão em nanosegundos agregação   1577777098
+Tempo de total em milisegundos agregação         1649
+Tempo de total em nanosegundos agregação         1649166600
+
+PERCENTUAL DE DESEMPENHO
+Percentual transferencia                            55.669
+Percentual total                                    7.066
+----------------------------------------------------------
+
+
+Teste
+Quantidade de mensagens 16384.
+Tamanho das mensagens 64 bytes **
+Tamanho dos pacotes 1024 bytes **
+Total transferido 1 MB
+
+SEM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   2057
+Tempo de transmissão em nanosegundos agregação   2057187673
+Tempo total em milisegundos agregação            2100
+Tempo total em nanosegundos agregação            2100062025
+
+COM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   1547
+Tempo de transmissão em nanosegundos agregação   1547940143
+Tempo de total em milisegundos agregação         1603
+Tempo de total em nanosegundos agregação         1603644404
+
+PERCENTUAL DE DESEMPENHO
+Percentual transferencia                            -24.755
+Percentual total                                    -23.638
+----------------------------------------------------------
+
+
+Teste
+Quantidade de mensagens 16384.
+Tamanho das mensagens 64 bytes **
+Tamanho dos pacotes 2048 bytes **
+Total transferido 1 MB
+
+SEM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   1701
+Tempo de transmissão em nanosegundos agregação   1701607782
+Tempo total em milisegundos agregação            1753
+Tempo total em nanosegundos agregação            1753246953
+
+COM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   2666
+Tempo de transmissão em nanosegundos agregação   2666709401
+Tempo de total em milisegundos agregação         2695
+Tempo de total em nanosegundos agregação         2695711156
+
+PERCENTUAL DE DESEMPENHO
+Percentual transferencia                            56.717
+Percentual total                                    53.755
+----------------------------------------------------------
+
+
+Teste
+Quantidade de mensagens 16384.
+Tamanho das mensagens 64 bytes **
+Tamanho dos pacotes 4096 bytes **
+Total transferido 1 MB
+
+SEM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   2120
+Tempo de transmissão em nanosegundos agregação   2120887376
+Tempo total em milisegundos agregação            2171
+Tempo total em nanosegundos agregação            2171344120
+
+COM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   2996
+Tempo de transmissão em nanosegundos agregação   2996042805
+Tempo de total em milisegundos agregação         3027
+Tempo de total em nanosegundos agregação         3027721795
+
+PERCENTUAL DE DESEMPENHO
+Percentual transferencia                            41.264
+Percentual total                                    39.440
+----------------------------------------------------------
+
+
+Teste
+Quantidade de mensagens 16384.
+Tamanho das mensagens 64 bytes **
+Tamanho dos pacotes 8192 bytes **
+Total transferido 1 MB
+
+SEM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   3281
+Tempo de transmissão em nanosegundos agregação   3281485826
+Tempo total em milisegundos agregação            3358
+Tempo total em nanosegundos agregação            3358393891
+
+COM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   1960
+Tempo de transmissão em nanosegundos agregação   1960467672
+Tempo de total em milisegundos agregação         1997
+Tempo de total em nanosegundos agregação         1997306119
+
+PERCENTUAL DE DESEMPENHO
+Percentual transferencia                            -40.257
+Percentual total                                    -40.528
+----------------------------------------------------------
+
+
+Teste
+Quantidade de mensagens 16384.
+Tamanho das mensagens 64 bytes **
+Tamanho dos pacotes 16384 bytes **
+Total transferido 1 MB
+
+SEM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   2037
+Tempo de transmissão em nanosegundos agregação   2037248298
+Tempo total em milisegundos agregação            2071
+Tempo total em nanosegundos agregação            2071355500
+
+COM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   1448
+Tempo de transmissão em nanosegundos agregação   1448704527
+Tempo de total em milisegundos agregação         1482
+Tempo de total em nanosegundos agregação         1482806642
+
+PERCENTUAL DE DESEMPENHO
+Percentual transferencia                            -28.889
+Percentual total                                    -28.414
+----------------------------------------------------------
+
+
+Teste
+Quantidade de mensagens 8192.
+Tamanho das mensagens 128 bytes **
+Tamanho dos pacotes 1024 bytes **
+Total transferido 1 MB
+
+SEM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   1706
+Tempo de transmissão em nanosegundos agregação   1706630308
+Tempo total em milisegundos agregação            1729
+Tempo total em nanosegundos agregação            1729787573
+
+COM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   2004
+Tempo de transmissão em nanosegundos agregação   2004002380
+Tempo de total em milisegundos agregação         2062
+Tempo de total em nanosegundos agregação         2062202501
+
+PERCENTUAL DE DESEMPENHO
+Percentual transferencia                            17.425
+Percentual total                                    19.217
+----------------------------------------------------------
+
+
+Teste
+Quantidade de mensagens 8192.
+Tamanho das mensagens 128 bytes **
+Tamanho dos pacotes 2048 bytes **
+Total transferido 1 MB
+
+SEM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   2784
+Tempo de transmissão em nanosegundos agregação   2784634818
+Tempo total em milisegundos agregação            2806
+Tempo total em nanosegundos agregação            2806532349
+
+COM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   2892
+Tempo de transmissão em nanosegundos agregação   2892448208
+Tempo de total em milisegundos agregação         2914
+Tempo de total em nanosegundos agregação         2914509955
+
+PERCENTUAL DE DESEMPENHO
+Percentual transferencia                            3.872
+Percentual total                                    3.847
+----------------------------------------------------------
+
+
+Teste
+Quantidade de mensagens 8192.
+Tamanho das mensagens 128 bytes **
+Tamanho dos pacotes 4096 bytes **
+Total transferido 1 MB
+
+SEM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   3516
+Tempo de transmissão em nanosegundos agregação   3516095442
+Tempo total em milisegundos agregação            3542
+Tempo total em nanosegundos agregação            3542844994
+
+COM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   2312
+Tempo de transmissão em nanosegundos agregação   2312745283
+Tempo de total em milisegundos agregação         2333
+Tempo de total em nanosegundos agregação         2333849611
+
+PERCENTUAL DE DESEMPENHO
+Percentual transferencia                            -34.224
+Percentual total                                    -34.125
+----------------------------------------------------------
+
+
+Teste
+Quantidade de mensagens 8192.
+Tamanho das mensagens 128 bytes **
+Tamanho dos pacotes 8192 bytes **
+Total transferido 1 MB
+
+SEM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   2763
+Tempo de transmissão em nanosegundos agregação   2763634103
+Tempo total em milisegundos agregação            2789
+Tempo total em nanosegundos agregação            2789372543
+
+COM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   1844
+Tempo de transmissão em nanosegundos agregação   1844311295
+Tempo de total em milisegundos agregação         1862
+Tempo de total em nanosegundos agregação         1862184307
+
+PERCENTUAL DE DESEMPENHO
+Percentual transferencia                            -33.265
+Percentual total                                    -33.240
+----------------------------------------------------------
+
+
+Teste
+Quantidade de mensagens 8192.
+Tamanho das mensagens 128 bytes **
+Tamanho dos pacotes 16384 bytes **
+Total transferido 1 MB
+
+SEM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   1341
+Tempo de transmissão em nanosegundos agregação   1341367013
+Tempo total em milisegundos agregação            1498
+Tempo total em nanosegundos agregação            1498273326
+
+COM AGREGAÇÃO
+Tempo de transmissão em milisegundos agregação   1611
+Tempo de transmissão em nanosegundos agregação   1611111791
+Tempo de total em milisegundos agregação         1633
+Tempo de total em nanosegundos agregação         1633583068
+
+PERCENTUAL DE DESEMPENHO
+Percentual transferencia                            20.110
+Percentual total                                    9.031
+----------------------------------------------------------
+
