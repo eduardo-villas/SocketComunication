@@ -1,0 +1,114 @@
+
+TestKey:type=withoutpacket: sizemessage=32: packet=1024=641432710
+TestKey:type=   withpacket: sizemessage=32: packet=1024=529731643
+Percentual transferencia                            -17.414
+
+TestKey:type=withoutpacket: sizemessage=32: packet=1024= 497649714
+TestKey:type=   withpacket: sizemessage=32: packet=1024= 509151193
+Percentual transferencia                                 2.311
+TestKey:type=withoutpacket: sizemessage=32: packet=2048= 969927920
+TestKey:type=   withpacket: sizemessage=32: packet=2048= 402646120
+Percentual transferencia                                 -58.487
+TestKey:type=withoutpacket: sizemessage=32: packet=4096= 447743149
+TestKey:type=   withpacket: sizemessage=32: packet=4096= 414738718
+Percentual transferencia                                 -7.371
+TestKey:type=withoutpacket: sizemessage=32: packet=8192= 730116619
+TestKey:type=   withpacket: sizemessage=32: packet=8192= 443085719
+Percentual transferencia                                 -39.313
+TestKey:type=withoutpacket: sizemessage=32: packet=16384= 658587252
+TestKey:type=   withpacket: sizemessage=32: packet=16384= 408385042
+Percentual transferencia                                 -37.991
+
+TestKey:type=withoutpacket: sizemessage=32: packet=1024= 66685539
+TestKey:type=   withpacket: sizemessage=32: packet=1024= 167453545
+Percentual transferencia                                 151.109
+
+TestKey:type=withoutpacket: sizemessage=32: packet=1024= 239622166
+TestKey:type=   withpacket: sizemessage=32: packet=1024= 180123735
+Percentual transferencia                                 -24.830
+
+TestKey:type=withoutpacket: sizemessage=32: packet=1024= 115488388
+TestKey:type=   withpacket: sizemessage=32: packet=1024= 244518586
+Percentual transferencia                                 111.726
+
+TestKey:type=withoutpacket: sizemessage=32: packet=1024= 302510126
+TestKey:type=   withpacket: sizemessage=32: packet=1024= 159270065
+Percentual transferencia                                 -47.351
+
+TestKey:type=withoutpacket: sizemessage=32: packet=1024= 84894376
+TestKey:type=   withpacket: sizemessage=32: packet=1024= 15072547
+Percentual transferencia                                 -82.246
+
+TestKey:type=withoutpacket: sizemessage=32: packet=1024= 65730073
+TestKey:type=   withpacket: sizemessage=32: packet=1024= 262526655
+Percentual transferencia                                 299.401
+
+TestKey:type=withoutpacket: sizemessage=32: packet=1024= 82323434
+TestKey:type=   withpacket: sizemessage=32: packet=1024= 204855765
+Percentual transferencia                                 148.843
+
+TestKey:type=withoutpacket: sizemessage=32: packet=1024= 84336574
+TestKey:type=   withpacket: sizemessage=32: packet=1024= 251365726
+Percentual transferencia                                 198.051
+
+TestKey:type=withoutpacket: sizemessage=32: packet=1024= 73687201
+TestKey:type=   withpacket: sizemessage=32: packet=1024= 178195743
+Percentual transferencia                                 141.827
+
+TestKey:type=withoutpacket: sizemessage=32: packet=1024= 83869984
+TestKey:type=   withpacket: sizemessage=32: packet=1024= 259082441
+Percentual transferencia                                 208.910
+
+TestKey:type=withoutpacket: sizemessage=32: packet=2048= 143061467
+TestKey:type=   withpacket: sizemessage=32: packet=2048= 255472579
+Percentual transferencia                                 78.575
+
+TestKey:type=withoutpacket: sizemessage=32: packet=2048= 71967327
+TestKey:type=   withpacket: sizemessage=32: packet=2048= 308016166
+Percentual transferencia                                 327.994
+TestKey:type=withoutpacket: sizemessage=32: packet=4096= 107735327
+TestKey:type=   withpacket: sizemessage=32: packet=4096= 138350488
+Percentual transferencia                                 28.417
+
+TestKey:type=withoutpacket: sizemessage=32: packet=2048= 220842214
+TestKey:type=   withpacket: sizemessage=32: packet=2048= 243477999
+Percentual transferencia                                 10.250
+TestKey:type=withoutpacket: sizemessage=32: packet=4096= 127593562
+TestKey:type=   withpacket: sizemessage=32: packet=4096= 75894186
+Percentual transferencia                                 -40.519
+
+TestKey:type=withoutpacket: sizemessage=32: packet=2048= 352167991
+TestKey:type=   withpacket: sizemessage=32: packet=2048= 134172209
+Percentual transferencia                                 -61.901
+TestKey:type=withoutpacket: sizemessage=32: packet=4096= 183202658
+TestKey:type=   withpacket: sizemessage=32: packet=4096= 140210589
+Percentual transferencia                                 -23.467
+
+TestKey:type=withoutpacket: sizemessage=32: packet=2048= 74887645
+TestKey:type=   withpacket: sizemessage=32: packet=2048= 202648128
+Percentual transferencia                                 170.603
+TestKey:type=withoutpacket: sizemessage=32: packet=4096= 112177611
+TestKey:type=   withpacket: sizemessage=32: packet=4096= 126595323
+Percentual transferencia                                 12.853
+
+TestKey:type=withoutpacket: sizemessage=32: packet=2048= 329079857
+TestKey:type=   withpacket: sizemessage=32: packet=2048= 204731181
+Percentual transferencia                                 -37.787
+TestKey:type=withoutpacket: sizemessage=32: packet=4096= 97501094
+TestKey:type=   withpacket: sizemessage=32: packet=4096= 701134989
+Percentual transferencia                                 619.105
+
+TestKey:type=withoutpacket: sizemessage=32: packet=2048= 258300451
+TestKey:type=   withpacket: sizemessage=32: packet=2048= 164827729
+Percentual transferencia                                 -36.188
+TestKey:type=withoutpacket: sizemessage=32: packet=4096= 107545420
+TestKey:type=   withpacket: sizemessage=32: packet=4096= 828354418
+Percentual transferencia                                 670.237
+
+TestKey:type=withoutpacket: sizemessage=32: packet=2048= 286967540
+TestKey:type=   withpacket: sizemessage=32: packet=2048= 198009668
+Percentual transferencia                                 -30.999
+TestKey:type=withoutpacket: sizemessage=32: packet=4096= 147258135
+TestKey:type=   withpacket: sizemessage=32: packet=4096= 231316411
+Percentual transferencia                                 57.082
+

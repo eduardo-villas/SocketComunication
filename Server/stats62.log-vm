@@ -1,0 +1,108 @@
+TestKey:type=withoutpacket: sizemessage=32: packet=1024= 28511990789
+TestKey:type=   withpacket: sizemessage=32: packet=1024= 37504487297
+Percentual transferencia                                 31.539
+TestKey:type=withoutpacket: sizemessage=32: packet=2048= 41617575711
+TestKey:type=   withpacket: sizemessage=32: packet=2048= 31152982318
+Percentual transferencia                                 -25.145
+TestKey:type=withoutpacket: sizemessage=32: packet=4096= 52139880406
+TestKey:type=   withpacket: sizemessage=32: packet=4096= 49177051975
+Percentual transferencia                                 -5.682
+TestKey:type=withoutpacket: sizemessage=32: packet=8192= 28936199860
+TestKey:type=   withpacket: sizemessage=32: packet=8192= 33877428031
+Percentual transferencia                                 17.076
+TestKey:type=withoutpacket: sizemessage=32: packet=16384= 21841395333
+TestKey:type=   withpacket: sizemessage=32: packet=16384= 60212448758
+Percentual transferencia                                 175.680
+TestKey:type=withoutpacket: sizemessage=64: packet=1024= 25266155701
+TestKey:type=   withpacket: sizemessage=64: packet=1024= 40730018345
+Percentual transferencia                                 61.204
+TestKey:type=withoutpacket: sizemessage=64: packet=2048= 45547601852
+TestKey:type=   withpacket: sizemessage=64: packet=2048= 30984065141
+Percentual transferencia                                 -31.974
+TestKey:type=withoutpacket: sizemessage=64: packet=4096= 26151067882
+TestKey:type=   withpacket: sizemessage=64: packet=4096= 26452576129
+Percentual transferencia                                 1.153
+TestKey:type=withoutpacket: sizemessage=64: packet=8192= 24264223360
+TestKey:type=   withpacket: sizemessage=64: packet=8192= 24649975470
+Percentual transferencia                                 1.590
+TestKey:type=withoutpacket: sizemessage=64: packet=16384= 27638160079
+TestKey:type=   withpacket: sizemessage=64: packet=16384= 27879109255
+Percentual transferencia                                 0.872
+TestKey:type=withoutpacket: sizemessage=128: packet=1024= 28987754192
+TestKey:type=   withpacket: sizemessage=128: packet=1024= 35759414918
+Percentual transferencia                                 23.360
+TestKey:type=withoutpacket: sizemessage=128: packet=2048= 23674119857
+TestKey:type=   withpacket: sizemessage=128: packet=2048= 22957733746
+Percentual transferencia                                 -3.026
+TestKey:type=withoutpacket: sizemessage=128: packet=4096= 54073672850
+TestKey:type=   withpacket: sizemessage=128: packet=4096= 32325338789
+Percentual transferencia                                 -40.220
+TestKey:type=withoutpacket: sizemessage=128: packet=8192= 51006332685
+TestKey:type=   withpacket: sizemessage=128: packet=8192= 100369536008
+Percentual transferencia                                 96.779
+TestKey:type=withoutpacket: sizemessage=128: packet=16384= 34990314365
+TestKey:type=   withpacket: sizemessage=128: packet=16384= 26716979484
+Percentual transferencia                                 -23.645
+
+TestKey:type=   withpacket: sizemessage=128: packet=16384= 26716979484
+TestKey:type=withoutpacket: sizemessage=32: packet=1024= 11855233051
+Percentual transferencia                                 -55.627
+TestKey:type=   withpacket: sizemessage=32: packet=1024= 9966938110
+TestKey:type=withoutpacket: sizemessage=32: packet=2048= 4370370301
+Percentual transferencia                                 -56.151
+TestKey:type=   withpacket: sizemessage=32: packet=2048= 3668789046
+TestKey:type=withoutpacket: sizemessage=32: packet=4096= 4497850239
+Percentual transferencia                                 22.598
+TestKey:type=   withpacket: sizemessage=32: packet=4096= 8128654443
+TestKey:type=withoutpacket: sizemessage=32: packet=8192= 5805862666
+Percentual transferencia                                 -28.575
+TestKey:type=   withpacket: sizemessage=32: packet=8192= 8887663842
+TestKey:type=withoutpacket: sizemessage=32: packet=16384= 3205049524
+Percentual transferencia                                 -63.938
+
+TestKey:type=withoutpacket: sizemessage=32: packet=1024= 163316928322
+TestKey:type=   withpacket: sizemessage=32: packet=1024= 37356327149
+Percentual transferencia                                 -77.126
+TestKey:type=withoutpacket: sizemessage=32: packet=2048= 36257280869
+TestKey:type=   withpacket: sizemessage=32: packet=2048= 26245231436
+Percentual transferencia                                 -27.614
+TestKey:type=withoutpacket: sizemessage=32: packet=4096= 24291461942
+TestKey:type=   withpacket: sizemessage=32: packet=4096= 72216436456
+Percentual transferencia                                 197.291
+TestKey:type=withoutpacket: sizemessage=32: packet=8192= 102177823528
+TestKey:type=   withpacket: sizemessage=32: packet=8192= 41030838891
+Percentual transferencia                                 -59.844
+TestKey:type=withoutpacket: sizemessage=32: packet=16384= 133827446841
+TestKey:type=   withpacket: sizemessage=32: packet=16384= 27046854403
+Percentual transferencia                                 -79.790
+TestKey:type=withoutpacket: sizemessage=64: packet=1024= 30007239326
+TestKey:type=   withpacket: sizemessage=64: packet=1024= 36023032354
+Percentual transferencia                                 20.048
+TestKey:type=withoutpacket: sizemessage=64: packet=2048= 22669772624
+TestKey:type=   withpacket: sizemessage=64: packet=2048= 28258427082
+Percentual transferencia                                 24.652
+TestKey:type=withoutpacket: sizemessage=64: packet=4096= 28159991786
+TestKey:type=   withpacket: sizemessage=64: packet=4096= 95387787297
+Percentual transferencia                                 238.735
+TestKey:type=withoutpacket: sizemessage=64: packet=8192= 50143962826
+TestKey:type=   withpacket: sizemessage=64: packet=8192= 48162504669
+Percentual transferencia                                 -3.952
+TestKey:type=withoutpacket: sizemessage=64: packet=16384= 58398496063
+TestKey:type=   withpacket: sizemessage=64: packet=16384= 156343128946
+Percentual transferencia                                 167.718
+TestKey:type=withoutpacket: sizemessage=128: packet=1024= 145167629526
+TestKey:type=   withpacket: sizemessage=128: packet=1024= 90970240991
+Percentual transferencia                                 -37.334
+TestKey:type=withoutpacket: sizemessage=128: packet=2048= 22814077237
+TestKey:type=   withpacket: sizemessage=128: packet=2048= 24098074506
+Percentual transferencia                                 5.628
+TestKey:type=withoutpacket: sizemessage=128: packet=4096= 77694670379
+TestKey:type=   withpacket: sizemessage=128: packet=4096= 33484323057
+Percentual transferencia                                 -56.903
+TestKey:type=withoutpacket: sizemessage=128: packet=8192= 18682142788
+TestKey:type=   withpacket: sizemessage=128: packet=8192= 18922537841
+Percentual transferencia                                 1.287
+TestKey:type=withoutpacket: sizemessage=128: packet=16384= 21415476654
+TestKey:type=   withpacket: sizemessage=128: packet=16384= 55992303848
+Percentual transferencia                                 161.457
+
