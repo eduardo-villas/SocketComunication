@@ -41,7 +41,7 @@ public class App {
 			@Override
 			public void execute(Server server) throws Exception {
 				int cont = 0;
-				try(final PrintWriter printWriter = new PrintWriter(new FileWriter("stats6.log", true))) {
+				try(final PrintWriter printWriter = new PrintWriter(new FileWriter("new-stats-server.log", true))) {
 					while (server.isOpen()) {
 						try {
 							elapTime.start();

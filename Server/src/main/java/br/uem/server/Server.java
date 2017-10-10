@@ -30,20 +30,21 @@ public class Server implements ServerInterface {
 	private OperationRunner operationRunner;
 	private int port;
 	private boolean hasError;
-				
+
 	public Server(ServerSocketFactory serverSocketFactory, int port) {
 		this.hasError = false;
 		this.port = port;
-		this.serverSocketFactory = serverSocketFactory; 
+		this.serverSocketFactory = serverSocketFactory;
 		this.serverState = new ServerStoped(this);
-		logger.info("Iniciando o servidor no estado "+this.serverState.getClass().getSimpleName());
+		logger.info("Iniciando o servidor no estado " + this.serverState.getClass().getSimpleName());
 	}
-	
+
 	public void setState(ServerState serverState) {
-		logger.info("Servidor mudou do estado "+this.serverState.getClass().getSimpleName()+" para "+serverState.getClass().getSimpleName());
+		logger.info("Servidor mudou do estado " + this.serverState.getClass().getSimpleName() + " para "
+				+ serverState.getClass().getSimpleName());
 		this.serverState = serverState;
 	}
-	
+
 	@Override
 	public void initServer() throws InvalidServerStateException, BindException {
 		serverState.initServer();
@@ -74,19 +75,49 @@ public class Server implements ServerInterface {
 			outputMessage = null;
 			socket = null;
 		}
-		
+
 	}
 
 	public void sendMessage(String buffer) throws IOException {
-		outputMessage.write(buffer+"\n");
+		buffer = String.format("%4d%s", buffer.length()+4, buffer);
+		logger.info("Servidor enviando mensagem: " + buffer);
+		outputMessage.write(buffer);
 		outputMessage.flush();
 	}
-	
+
 	public String getMessage() throws IOException {
-		String message = inputMessage.readLine();
+		
+		int messageLength = readHeader(4);
+		char buffer[] = readBytes(messageLength - 4); 
+		String message = new String(buffer, 0, messageLength-4);
+
 		if (isGoodbye(message))
 			throw new ConnectionIsClose();
 		return message;
+	}
+
+	private int readHeader(int len) throws IOException {
+		char bytes[] = readBytes(len);
+		int sizePacket = Integer.parseInt(new String(bytes, 0, 4)); 
+		return sizePacket;
+	}
+	
+	private char[] readBytes(int len) throws IOException {
+		
+		char buffer[] = new char[len];
+		int offset = 0;
+		int messageLength = 0;
+		do {
+			offset = inputMessage.read(buffer, offset, len);
+			messageLength += offset;
+			len -= offset;
+		} while (hasMoreBytes(buffer, offset, len, messageLength));
+		
+		return buffer;
+	}
+
+	private boolean hasMoreBytes(char[] buffer, int offset, int len, int lenMessage) {
+		return lenMessage < len;
 	}
 
 	private boolean isGoodbye(String message) {
@@ -101,7 +132,7 @@ public class Server implements ServerInterface {
 			logger.error("Erro ao inicializar os canais de entrada e saida.", e);
 			throw new IOException("Erro ao inicializar os canais de entrada e saida.", e);
 		}
-		
+
 	}
 
 	public void createServerSocket(int port) throws IOException, BindException {
@@ -111,7 +142,7 @@ public class Server implements ServerInterface {
 	public Socket getSocket() {
 		return socket;
 	}
-	
+
 	public void accept() throws IOException {
 		socket = serverSocket.accept();
 	}
@@ -119,14 +150,14 @@ public class Server implements ServerInterface {
 	public void setOperationRunner(OperationRunner operationRunner) {
 		this.operationRunner = operationRunner;
 	}
-	
+
 	public OperationRunner getOperationRunner() {
 		return operationRunner;
 	}
 
 	@Override
 	public void doComunication() throws InvalidServerStateException, IOException {
-		serverState.doComunication();		
+		serverState.doComunication();
 	}
 
 	public int getPort() {

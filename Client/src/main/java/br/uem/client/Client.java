@@ -78,25 +78,56 @@ public class Client implements ClientInterface {
 	}
 
 	public void sendMessage(String buffer) throws IOException {
-//		logger.info("Cliente enviando mensagem: " + buffer);
-		outputMessage.write(buffer + "\n");
+		buffer = String.format("%4d%s", buffer.length()+4, buffer);
+		logger.info("Cliente enviando mensagem:" + buffer);
+		outputMessage.write(buffer);
 		outputMessage.flush();
 	}
 
 	public void flush() throws IOException {
 		outputMessage.flush();
 	}
-
+	
 	public void sendMessageWithoutFlush(String buffer) throws IOException {
-		logger.info("Cliente enviando mensagem: " + buffer);
-		outputMessage.write(buffer + "\n");
+		buffer = String.format("%4d%s", buffer.length()+4, buffer);
+		logger.info("Cliente enviando mensagem:" + buffer);
+		outputMessage.write(buffer);
+		outputMessage.flush();
 	}
 
 	
 	public String getMessage() throws IOException {
 
-		String buffer = inputMessage.readLine();
+		int messageLength = readHeader(4);
+		char buffer[] = readBytes(messageLength - 4); 
+		String message = new String(buffer, 0, messageLength-4);
+
+		return message;
+		
+	}
+
+	private int readHeader(int len) throws IOException {
+		char bytes[] = readBytes(len);
+		int sizePacket = Integer.parseInt(new String(bytes, 0, 4)); 
+		return sizePacket;
+	}
+	
+	private char[] readBytes(int len) throws IOException {
+		
+		char buffer[] = new char[len];
+		int offset = 0;
+		int messageLength = 0;
+		do {
+			offset = inputMessage.read(buffer, offset, len);
+			messageLength += offset;
+			len -= offset;
+		} while (hasMoreBytes(buffer, offset, len, messageLength));
+		
 		return buffer;
+	}
+
+	private boolean hasMoreBytes(char[] buffer, int offset, int len, int lenMessage) {
+		return lenMessage < len;
 	}
 
 	public void initializeIOBuffers() throws IOException {

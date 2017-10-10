@@ -18,8 +18,8 @@ import br.uem.client.protocol.InvalidClientStateException;
 public class App {
 
 	private static final int SERVER_PORT = 3000;
-	private static final String SERVER_IP = "54.186.97.210";
-//	private static final String SERVER_IP = "localhost";
+//	private static final String SERVER_IP = "54.186.97.210";
+	private static final String SERVER_IP = "localhost";
 
 	private static Logger logger = Logger.getLogger(App.class);
 
