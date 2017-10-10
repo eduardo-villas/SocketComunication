@@ -15,7 +15,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'Server'
-
-include ':Commons'
-project(':Commons').projectDir = new File('../Commons') 
+rootProject.name = 'Commons'

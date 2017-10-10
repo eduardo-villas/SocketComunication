@@ -5,6 +5,8 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.Writer;
 import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -24,8 +26,8 @@ public class Server implements ServerInterface {
 	Socket socket = null;
 	ServerSocket serverSocket;
 	ServerSocketFactory serverSocketFactory;
-	private BufferedReader inputMessage;
-	private BufferedWriter outputMessage;
+	private Reader inputMessage;
+	private Writer outputMessage;
 	private Logger logger = Logger.getLogger(Server.class);
 	private OperationRunner operationRunner;
 	private int port;
@@ -126,8 +128,8 @@ public class Server implements ServerInterface {
 
 	public void initializeIOBuffers() throws IOException {
 		try {
-			inputMessage = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			outputMessage = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+			inputMessage = new br.uem.comons.Reader(new BufferedReader(new InputStreamReader(socket.getInputStream())));
+			outputMessage = new br.uem.comons.Writer(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
 		} catch (IOException e) {
 			logger.error("Erro ao inicializar os canais de entrada e saida.", e);
 			throw new IOException("Erro ao inicializar os canais de entrada e saida.", e);
