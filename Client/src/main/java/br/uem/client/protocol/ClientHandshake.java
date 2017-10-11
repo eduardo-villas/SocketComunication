@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.log4j.Logger;
 
 import br.uem.client.Client;
+import br.uem.comons.Constants;
 
 public class ClientHandshake implements ClientState {
 
@@ -23,7 +24,7 @@ public class ClientHandshake implements ClientState {
 	void read() throws InvalidClientStateException, IOException {
 		String clientMessage = client.getMessage();
 		logger.info("Servidor respondeu: " + clientMessage);
-		if (!"HEY".equalsIgnoreCase(clientMessage)) {
+		if (!Constants.HEY.equalsIgnoreCase(clientMessage)) {
 			this.client.closeResources();
 			this.client.setState(new ClientClosed());
 			return;

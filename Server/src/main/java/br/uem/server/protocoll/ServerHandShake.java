@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
+import br.uem.comons.Constants;
 import br.uem.server.Server;
 
 public class ServerHandShake implements ServerState {
@@ -28,7 +29,7 @@ public class ServerHandShake implements ServerState {
 
 	String read() throws InvalidServerStateException, IOException {
 		String clientMessage = server.getMessage();
-		if (!"HEY".equalsIgnoreCase(clientMessage)){
+		if (!Constants.HEY.equalsIgnoreCase(clientMessage)){
 			close();
 			return null;
 		}

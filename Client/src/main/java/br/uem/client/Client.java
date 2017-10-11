@@ -12,13 +12,15 @@ import org.apache.log4j.Logger;
 import br.uem.client.protocol.ClientStoped;
 import br.uem.client.protocol.ClientState;
 import br.uem.client.protocol.InvalidClientStateException;
+import br.uem.comons.Reader;
+import br.uem.comons.Writer;
 
 public class Client implements ClientInterface {
 
 	private ClientState clientState;
 	private Socket socket = null;
-	private BufferedReader inputMessage;
-	private BufferedWriter outputMessage;
+	private Reader inputMessage;
+	private Writer outputMessage;
 	private Logger logger = Logger.getLogger(Client.class);
 	private String parameters;
 	private OperationRunner operationRunner;
@@ -78,62 +80,28 @@ public class Client implements ClientInterface {
 	}
 
 	public void sendMessage(String buffer) throws IOException {
-		buffer = String.format("%4d%s", buffer.length()+4, buffer);
-		logger.info("Cliente enviando mensagem:" + buffer);
 		outputMessage.write(buffer);
 		outputMessage.flush();
 	}
 
-	public void flush() throws IOException {
-		outputMessage.flush();
-	}
-	
 	public void sendMessageWithoutFlush(String buffer) throws IOException {
-		buffer = String.format("%4d%s", buffer.length()+4, buffer);
-		logger.info("Cliente enviando mensagem:" + buffer);
 		outputMessage.write(buffer);
-		outputMessage.flush();
 	}
 
-	
 	public String getMessage() throws IOException {
 
-		int messageLength = readHeader(4);
-		char buffer[] = readBytes(messageLength - 4); 
+		int messageLength = this.inputMessage.readHeader(0, 4);
+		char buffer[] = this.inputMessage.readBytes(4, messageLength); 
 		String message = new String(buffer, 0, messageLength-4);
 
 		return message;
 		
 	}
 
-	private int readHeader(int len) throws IOException {
-		char bytes[] = readBytes(len);
-		int sizePacket = Integer.parseInt(new String(bytes, 0, 4)); 
-		return sizePacket;
-	}
-	
-	private char[] readBytes(int len) throws IOException {
-		
-		char buffer[] = new char[len];
-		int offset = 0;
-		int messageLength = 0;
-		do {
-			offset = inputMessage.read(buffer, offset, len);
-			messageLength += offset;
-			len -= offset;
-		} while (hasMoreBytes(buffer, offset, len, messageLength));
-		
-		return buffer;
-	}
-
-	private boolean hasMoreBytes(char[] buffer, int offset, int len, int lenMessage) {
-		return lenMessage < len;
-	}
-
 	public void initializeIOBuffers() throws IOException {
 		try {
-			inputMessage = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
-			outputMessage = new BufferedWriter(new OutputStreamWriter(getSocket().getOutputStream()));
+			inputMessage = new Reader(new BufferedReader(new InputStreamReader(getSocket().getInputStream())));
+			outputMessage = new Writer(new BufferedWriter(new OutputStreamWriter(getSocket().getOutputStream())));
 		} catch (IOException e) {
 			logger.error("Erro ao inicializar os canais de entrada e saida.", e);
 			throw new IOException("Erro ao inicializar os canais de entrada e saida.", e);

@@ -27,4 +27,12 @@ public class Writer extends java.io.Writer {
 		this.bufferedWriter.write(arg0, off, len);
 	}
 
+	@Override
+	public void write(String buffer) throws IOException {
+		buffer = buffer+"\n";
+		buffer = String.format("%4d%s", buffer.length()+4, buffer);
+		super.write(buffer);
+		this.bufferedWriter.flush();
+	}
+
 }

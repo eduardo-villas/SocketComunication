@@ -16,3 +16,6 @@ include 'services:webservice'
 */
 
 rootProject.name = 'Client'
+include ':Commons'
+project(':Commons').projectDir = new File('../Commons') 
+

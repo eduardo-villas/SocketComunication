@@ -5,8 +5,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.Writer;
 import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -15,6 +13,9 @@ import javax.net.ServerSocketFactory;
 
 import org.apache.log4j.Logger;
 
+import br.uem.comons.Constants;
+import br.uem.comons.Reader;
+import br.uem.comons.Writer;
 import br.uem.server.protocoll.ConnectionIsClose;
 import br.uem.server.protocoll.InvalidServerStateException;
 import br.uem.server.protocoll.ServerState;
@@ -81,16 +82,13 @@ public class Server implements ServerInterface {
 	}
 
 	public void sendMessage(String buffer) throws IOException {
-		buffer = String.format("%4d%s", buffer.length()+4, buffer);
-		logger.info("Servidor enviando mensagem: " + buffer);
 		outputMessage.write(buffer);
-		outputMessage.flush();
 	}
 
 	public String getMessage() throws IOException {
 		
-		int messageLength = readHeader(4);
-		char buffer[] = readBytes(messageLength - 4); 
+		int messageLength = this.inputMessage.readHeader(0, 4);
+		char buffer[] = this.inputMessage.readBytes(4, messageLength); 
 		String message = new String(buffer, 0, messageLength-4);
 
 		if (isGoodbye(message))
@@ -98,38 +96,14 @@ public class Server implements ServerInterface {
 		return message;
 	}
 
-	private int readHeader(int len) throws IOException {
-		char bytes[] = readBytes(len);
-		int sizePacket = Integer.parseInt(new String(bytes, 0, 4)); 
-		return sizePacket;
-	}
-	
-	private char[] readBytes(int len) throws IOException {
-		
-		char buffer[] = new char[len];
-		int offset = 0;
-		int messageLength = 0;
-		do {
-			offset = inputMessage.read(buffer, offset, len);
-			messageLength += offset;
-			len -= offset;
-		} while (hasMoreBytes(buffer, offset, len, messageLength));
-		
-		return buffer;
-	}
-
-	private boolean hasMoreBytes(char[] buffer, int offset, int len, int lenMessage) {
-		return lenMessage < len;
-	}
-
 	private boolean isGoodbye(String message) {
-		return "GOODBYE".equals(message);
+		return Constants.GOODBYE.equals(message);
 	}
 
 	public void initializeIOBuffers() throws IOException {
 		try {
-			inputMessage = new br.uem.comons.Reader(new BufferedReader(new InputStreamReader(socket.getInputStream())));
-			outputMessage = new br.uem.comons.Writer(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
+			inputMessage = new Reader(new BufferedReader(new InputStreamReader(socket.getInputStream())));
+			outputMessage = new Writer(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
 		} catch (IOException e) {
 			logger.error("Erro ao inicializar os canais de entrada e saida.", e);
 			throw new IOException("Erro ao inicializar os canais de entrada e saida.", e);

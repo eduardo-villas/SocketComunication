@@ -19,7 +19,34 @@ public class Reader extends java.io.Reader {
 
 	@Override
 	public int read(char[] cbuf, int off, int len) throws IOException {
-		return this.bufferedReader.read(cbuf, off, len);
+		
+		int offset = off;
+		int messageLength = 0;
+		do {
+			offset = this.bufferedReader.read(cbuf, offset, len);
+			messageLength += offset;
+			len -= offset;
+		} while (hasMoreBytes(cbuf, offset, len, messageLength));
+		
+		return messageLength;
+	}
+	
+	private boolean hasMoreBytes(char[] buffer, int offset, int len, int lenMessage) {
+		return len > 0;
+	}
+	
+	public int readHeader(int off, int len) throws IOException {
+		char buffer[] = readBytes(off, len);
+		String stringPacketSize = new String(buffer, 0, 4).trim();
+		int sizePacket = Integer.parseInt(stringPacketSize); 
+		return sizePacket;
+	}
+	
+	public char[] readBytes(int off, int len) throws IOException {
+		len = len - off;
+		char buffer[] = new char[len];
+		this.read(buffer, 0, len);
+		return buffer; 
 	}
 
 }
