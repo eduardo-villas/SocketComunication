@@ -12,9 +12,9 @@ import org.apache.log4j.Logger;
 import br.uem.client.protocol.ClientStoped;
 import br.uem.client.protocol.ClientState;
 import br.uem.client.protocol.InvalidClientStateException;
-import br.uem.comons.Constants;
-import br.uem.comons.Reader;
-import br.uem.comons.Writer;
+import br.uem.commons.comunication.Constants;
+import br.uem.commons.comunication.Reader;
+import br.uem.commons.comunication.Writer;
 
 public class Client implements ClientInterface {
 

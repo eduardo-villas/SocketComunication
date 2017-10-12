@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
-import br.uem.comons.Constants;
+import br.uem.commons.comunication.Constants;
 import br.uem.server.Server;
 
 public class ServerHandShake implements ServerState {

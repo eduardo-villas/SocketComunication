@@ -36,19 +36,19 @@ public class App {
 				sendBytes(client, 32, 2, transferInMB);
 				sendBytes(client, 32, 4, transferInMB);
 				sendBytes(client, 32, 8, transferInMB);
-//				sendBytes(client, 32, 16, transferInMB);
+				sendBytes(client, 32, 16, transferInMB);
 				
 				sendBytes(client, 64, 1, transferInMB);
 				sendBytes(client, 64, 2, transferInMB);
 				sendBytes(client, 64, 4, transferInMB);
 				sendBytes(client, 64, 8, transferInMB);
-//				sendBytes(client, 64, 16, transferInMB);
+				sendBytes(client, 64, 16, transferInMB);
 
 				sendBytes(client, 128, 1, transferInMB);
 				sendBytes(client, 128, 2, transferInMB);
 				sendBytes(client, 128, 4, transferInMB);
 				sendBytes(client, 128, 8, transferInMB);
-//				sendBytes(client, 128, 16, transferInMB);
+				sendBytes(client, 128, 16, transferInMB);
 				
 			}
 

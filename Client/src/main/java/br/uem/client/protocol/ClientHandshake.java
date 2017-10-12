@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.apache.log4j.Logger;
 
 import br.uem.client.Client;
-import br.uem.comons.Constants;
+import br.uem.commons.comunication.Constants;
 
 public class ClientHandshake implements ClientState {
 

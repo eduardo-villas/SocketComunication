@@ -1,4 +1,4 @@
-package br.uem.comons;
+package br.uem.commons.comunication;
 
 import java.io.BufferedReader;
 import java.io.IOException;

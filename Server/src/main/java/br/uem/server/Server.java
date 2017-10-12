@@ -13,9 +13,9 @@ import javax.net.ServerSocketFactory;
 
 import org.apache.log4j.Logger;
 
-import br.uem.comons.Constants;
-import br.uem.comons.Reader;
-import br.uem.comons.Writer;
+import br.uem.commons.comunication.Constants;
+import br.uem.commons.comunication.Reader;
+import br.uem.commons.comunication.Writer;
 import br.uem.server.protocoll.ConnectionIsClose;
 import br.uem.server.protocoll.InvalidServerStateException;
 import br.uem.server.protocoll.ServerState;

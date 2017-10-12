@@ -1,4 +1,4 @@
-package br.uem.comons;
+package br.uem.commons.comunication;
 
 public class Constants {
 	

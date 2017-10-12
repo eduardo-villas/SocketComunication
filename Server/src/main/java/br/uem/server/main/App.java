@@ -42,12 +42,6 @@ public class App {
 			public void execute(Server server) throws Exception {
 				int cont = 0;
 				try(final PrintWriter printWriter = new PrintWriter(new FileWriter("new-stats-server.log", true))) {
-					int miliseconds = 1000;
-					try {
-						Thread.sleep(miliseconds);
-					} catch (InterruptedException e) {
-						logger.error(String.format("Erro ao tentar dormir por %d segundos", miliseconds/1000), e);
-					}
 					while (server.isOpen()) {
 						try {
 							elapTime.start();
