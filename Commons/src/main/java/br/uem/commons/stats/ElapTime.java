@@ -1,7 +1,7 @@
-package br.uem.server.main;
+package br.uem.commons.stats;
 
 public class ElapTime {
-	
+
 	private long start;
 	private long finish;
 	
@@ -20,4 +20,5 @@ public class ElapTime {
 	public static long toMiliseconds(long nanoseconds) {
 		return nanoseconds / 1000000;
 	}
+
 }

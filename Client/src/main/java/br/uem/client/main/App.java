@@ -14,6 +14,7 @@ import br.uem.client.Client;
 import br.uem.client.ClientRunner;
 import br.uem.client.OperationRunner;
 import br.uem.client.protocol.InvalidClientStateException;
+import br.uem.commons.stats.ElapTime;
 
 public class App {
 

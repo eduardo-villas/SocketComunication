@@ -11,6 +11,7 @@ import javax.net.ServerSocketFactory;
 
 import org.apache.log4j.Logger;
 
+import br.uem.commons.stats.ElapTime;
 import br.uem.server.OperationRunner;
 import br.uem.server.Server;
 import br.uem.server.ServerRunner;
@@ -47,6 +48,7 @@ public class App {
 							elapTime.start();
 							String message = server.getMessage();
 							elapTime.finish();
+
 							if (message.startsWith("TestKey")) {
 								if (currentTimeTransfer != 0) {
 									stats.put(currentKey, currentTimeTransfer);

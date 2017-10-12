@@ -7,12 +7,14 @@ public class Statistic {
 
 	
 	private Map<String, Long> stats = new LinkedHashMap<>();
-	
+	private long currentTimeTransfer = 0L;
+	private String currentKey = null;
+
 	public Statistic() {
 		
 	}
 	
-	void initStatistic() {
+	void analyze() {
 		
 	}
 }
