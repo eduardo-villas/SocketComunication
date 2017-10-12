@@ -55,7 +55,6 @@ public class App {
 
 			private void sendBytes(Client client, final int SIZE_MESSAGE, final int multiplyPacket, final int transferInMB) throws IOException {
 				
-				String cabecalho = String.join("", Collections.nCopies(3, "8bytesMS"));
 				String message = String.join("", Collections.nCopies(SIZE_MESSAGE/8, "8bytesMS"));
 				final int SIZE_PACKAGE = 1024*multiplyPacket;
 				final String TAG = "packet"+SIZE_PACKAGE; 
@@ -73,7 +72,7 @@ public class App {
 				for (int i = 0 ;i < TOTAL_MESSAGES; ++i) {
 					logger.info(String.format("enviando mensagem sem agregação %d: %s", i+1, message));
 					elapTime.start();
-					client.sendMessage(cabecalho+message);
+					client.sendMessage(message);
 					elapTime.finish();
 					timeTransferWithoutPacket += elapTime.elapTime();
 				}
@@ -92,7 +91,7 @@ public class App {
 					if (sb.length() >= SIZE_PACKAGE) {
 						logger.info(String.format("Tamanho do pacote enviado %s", sb.length()));
 						elapTime.start();
-						client.sendMessage(cabecalho+sb.toString());
+						client.sendMessage(sb.toString());
 						elapTime.finish();
 						timeTransferWithPacket += elapTime.elapTime();
 						sb = new StringBuilder();
@@ -101,7 +100,7 @@ public class App {
 				if (!sb.toString().isEmpty()) {
 					logger.info(String.format("Tamanho do pacote enviado %s", sb.length()));
 					elapTime.start();
-					client.sendMessage(cabecalho+sb.toString());
+					client.sendMessage(sb.toString());
 					elapTime.finish();
 					timeTransferWithPacket += elapTime.elapTime();
 				}
