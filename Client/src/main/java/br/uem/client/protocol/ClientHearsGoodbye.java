@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.log4j.Logger;
 
 import br.uem.client.Client;
+import br.uem.commons.comunication.InvalidComunicationStateException;
 
 public class ClientHearsGoodbye extends ClientGoodBye {
 
@@ -17,7 +18,7 @@ public class ClientHearsGoodbye extends ClientGoodBye {
 	}
 
 	@Override
-	public void doComunication() throws InvalidClientStateException, IOException {
+	public void doComunication() throws InvalidComunicationStateException, IOException {
 		String message = this.client.getMessage();
 		logger.info("finalizando conexão "+ message);
 		this.client.closeResources();

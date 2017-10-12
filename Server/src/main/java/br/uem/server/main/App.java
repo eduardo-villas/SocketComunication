@@ -6,10 +6,11 @@ import javax.net.ServerSocketFactory;
 
 import org.apache.log4j.Logger;
 
+import br.uem.commons.comunication.OperationRunner;
+import br.uem.commons.comunication.SenderReceiver;
 import br.uem.commons.stats.ElapTime;
 import br.uem.commons.stats.Statistic;
 import br.uem.commons.stats.StatsPrinter;
-import br.uem.server.OperationRunner;
 import br.uem.server.Server;
 import br.uem.server.ServerRunner;
 
@@ -35,17 +36,17 @@ public class App {
 			ElapTime elapTime = new ElapTime();
 
 			@Override
-			public void execute(Server server) throws Exception {
+			public void execute(SenderReceiver senderReceiver) throws Exception {
 
 				int cont = 0;
 				this.statistic.initialize();
 
-				while (server.isOpen()) {
+				while (senderReceiver.isOpen()) {
 
 					try {
 
 						elapTime.start();
-						String message = server.getMessage();
+						String message = senderReceiver.getMessage();
 						elapTime.finish();
 						statistic.analyze(elapTime, message);
 						logger.info(String.format("mensagem %d enviada pelo cliente %s", ++cont, message));

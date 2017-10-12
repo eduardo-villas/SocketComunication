@@ -2,6 +2,8 @@ package br.uem.client.protocol;
 
 import java.io.IOException;
 
+import br.uem.commons.comunication.InvalidComunicationStateException;
+
 public class ClientClosed implements ClientState {
 
 	public ClientClosed() {
@@ -9,17 +11,17 @@ public class ClientClosed implements ClientState {
 	}
 
 	@Override
-	public void runClient() throws InvalidClientStateException {
-		throw new InvalidClientStateException("Cliente fechado. Impossível rodar o cliente.");
+	public void runClient() throws InvalidComunicationStateException {
+		throw new InvalidComunicationStateException("Cliente fechado. Impossível rodar o cliente.");
 	}
 
 	@Override
-	public void doComunication() throws InvalidClientStateException, IOException {
-		throw new InvalidClientStateException("O cliente fechado. Impossível enviar mensagens.");
+	public void doComunication() throws InvalidComunicationStateException, IOException {
+		throw new InvalidComunicationStateException("O cliente fechado. Impossível enviar mensagens.");
 	}
 
 	@Override
-	public boolean isOpen() throws InvalidClientStateException {
+	public boolean isOpen() throws InvalidComunicationStateException {
 		return false;
 	}
 

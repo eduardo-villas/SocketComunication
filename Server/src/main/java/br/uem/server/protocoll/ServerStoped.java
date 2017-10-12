@@ -5,6 +5,7 @@ import java.net.BindException;
 
 import org.apache.log4j.Logger;
 
+import br.uem.commons.comunication.InvalidComunicationStateException;
 import br.uem.server.Server;
 
 public class ServerStoped implements ServerState {
@@ -17,7 +18,7 @@ public class ServerStoped implements ServerState {
 	}
 	
 	@Override
-	public void initServer() throws InvalidServerStateException, BindException {
+	public void initServer() throws InvalidComunicationStateException, BindException {
 		try {
 			server.createServerSocket(server.getPort());
 			server.setState(new ServerWaiting(server));
@@ -31,26 +32,26 @@ public class ServerStoped implements ServerState {
 		
 	}
 
-	String read() throws InvalidServerStateException , IOException {
-		throw new InvalidServerStateException("Estado do servidor invalido para operação read");
+	String read() throws InvalidComunicationStateException , IOException {
+		throw new InvalidComunicationStateException("Estado do servidor invalido para operação read");
 	}
 
-	void write(String message) throws InvalidServerStateException, IOException{
-		throw new InvalidServerStateException("Estado do servidor invalido para operação write");
-	}
-
-	@Override
-	public void waitForConnection() throws InvalidServerStateException {
-		throw new InvalidServerStateException("Estado do servidor invalido para operação waiting");
+	void write(String message) throws InvalidComunicationStateException, IOException{
+		throw new InvalidComunicationStateException("Estado do servidor invalido para operação write");
 	}
 
 	@Override
-	public boolean isOpen() throws InvalidServerStateException {
+	public void waitForConnection() throws InvalidComunicationStateException {
+		throw new InvalidComunicationStateException("Estado do servidor invalido para operação waiting");
+	}
+
+	@Override
+	public boolean isOpen() throws InvalidComunicationStateException {
 		return false;
 	}
 
 	@Override
-	public void doComunication() throws InvalidServerStateException, IOException {
+	public void doComunication() throws InvalidComunicationStateException, IOException {
 		write(read());
 	}
 	

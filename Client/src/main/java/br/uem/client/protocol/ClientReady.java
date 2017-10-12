@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.log4j.Logger;
 
 import br.uem.client.Client;
+import br.uem.commons.comunication.InvalidComunicationStateException;
 
 public class ClientReady implements ClientState {
 
@@ -16,17 +17,17 @@ public class ClientReady implements ClientState {
 	}
 
 	@Override
-	public void runClient() throws InvalidClientStateException {
+	public void runClient() throws InvalidComunicationStateException {
 		logger.warn("O Cliente já está rodando.");
 	}
 
 	@Override
-	public boolean isOpen() throws InvalidClientStateException {
+	public boolean isOpen() throws InvalidComunicationStateException {
 		return !client.getSocket().isClosed();
 	}
 
 	@Override
-	public void doComunication() throws InvalidClientStateException, IOException {
+	public void doComunication() throws InvalidComunicationStateException, IOException {
 		try {
 			this.client.getOperationRunner().execute(this.client);
 			this.client.setState(new ClientSayGoodbye(this.client));

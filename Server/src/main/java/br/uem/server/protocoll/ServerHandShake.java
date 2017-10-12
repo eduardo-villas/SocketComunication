@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.log4j.Logger;
 
 import br.uem.commons.comunication.Constants;
+import br.uem.commons.comunication.InvalidComunicationStateException;
 import br.uem.server.Server;
 
 public class ServerHandShake implements ServerState {
@@ -17,17 +18,17 @@ public class ServerHandShake implements ServerState {
 	}
 	
 	@Override
-	public void initServer() throws InvalidServerStateException {
+	public void initServer() throws InvalidComunicationStateException {
 		logger.warn("O servidor esta esta executando o handshake.");
 	}
 
 	@Override
-	public void waitForConnection() throws InvalidServerStateException {
+	public void waitForConnection() throws InvalidComunicationStateException {
 		logger.warn("O servidor já estabeleceu a connexão com o cliente.");
 
 	}
 
-	String read() throws InvalidServerStateException, IOException {
+	String read() throws InvalidComunicationStateException, IOException {
 		String clientMessage = server.getMessage();
 		if (!Constants.HEY.equalsIgnoreCase(clientMessage)){
 			close();
@@ -36,23 +37,23 @@ public class ServerHandShake implements ServerState {
 		return clientMessage;
 	}
 
-	void write(String message) throws InvalidServerStateException, IOException {
+	void write(String message) throws InvalidComunicationStateException, IOException {
 		server.sendMessage("HEY");
 		server.setState(new ServerReady(server));
 	}
 
-	public void close() throws InvalidServerStateException {
+	public void close() throws InvalidComunicationStateException {
 		server.closeResources();
 		server.setState(new ServerWaiting(this.server));
 	}
 
 	@Override
-	public boolean isOpen() throws InvalidServerStateException {
+	public boolean isOpen() throws InvalidComunicationStateException {
 		return !server.getSocket().isClosed();
 	}
 
 	@Override
-	public void doComunication() throws InvalidServerStateException, IOException {
+	public void doComunication() throws InvalidComunicationStateException, IOException {
 		write(read());
 	}
 

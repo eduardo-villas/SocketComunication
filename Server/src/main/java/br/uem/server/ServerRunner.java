@@ -4,7 +4,8 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
-import br.uem.server.protocoll.InvalidServerStateException;
+import br.uem.commons.comunication.InvalidComunicationStateException;
+import br.uem.commons.comunication.OperationRunner;
 
 public class ServerRunner {
 
@@ -21,7 +22,7 @@ public class ServerRunner {
 			try {
 				server.waitForConnection();
 				doComunication(server);
-			} catch (InvalidServerStateException e) {
+			} catch (InvalidComunicationStateException e) {
 				logger.error("Ocorreu um erro na comunicação com o cliente.", e);
 			}
 		}
@@ -33,7 +34,7 @@ public class ServerRunner {
 			while (server.isOpen()) {
 				server.doComunication();
 			}
-		} catch (InvalidServerStateException e) {
+		} catch (InvalidComunicationStateException e) {
 			logger.error("Erro na comunicacao com o cliente ", e);
 		} catch (IOException e) {
 			logger.error("Erro na comunicacao com o cliente ", e);

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
+import br.uem.commons.comunication.InvalidComunicationStateException;
 import br.uem.server.Server;
 
 public class ServerReady implements ServerState {
@@ -16,22 +17,22 @@ public class ServerReady implements ServerState {
 	}
 
 	@Override
-	public void initServer() throws InvalidServerStateException {
+	public void initServer() throws InvalidComunicationStateException {
 		logger.warn("O servidor já está pronto para enviar e receber mensagens");
 	}
 
 	@Override
-	public void waitForConnection() throws InvalidServerStateException {
+	public void waitForConnection() throws InvalidComunicationStateException {
 		logger.warn("O servidor já estabeleceu um conexão com o cliente");
 	}
 
 	@Override
-	public boolean isOpen() throws InvalidServerStateException {
+	public boolean isOpen() throws InvalidComunicationStateException {
 		return !server.getSocket().isClosed();
 	}
 
 	@Override
-	public void doComunication() throws InvalidServerStateException, IOException {
+	public void doComunication() throws InvalidComunicationStateException, IOException {
 		try {
 			this.server.getOperationRunner().execute(this.server);
 		} catch (ConnectionIsClose e) {

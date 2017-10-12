@@ -8,6 +8,7 @@ import java.net.UnknownHostException;
 import org.apache.log4j.Logger;
 
 import br.uem.client.Client;
+import br.uem.commons.comunication.InvalidComunicationStateException;
 
 public class ClientStoped implements ClientState {
 
@@ -19,7 +20,7 @@ public class ClientStoped implements ClientState {
 	}
 
 	@Override
-	public void runClient() throws InvalidClientStateException {
+	public void runClient() throws InvalidComunicationStateException {
 		String host = this.client.getServerIp();
 		int port = this.client.getServerPort();
 		try {
@@ -40,13 +41,13 @@ public class ClientStoped implements ClientState {
 	}
 
 	@Override
-	public boolean isOpen() throws InvalidClientStateException {
+	public boolean isOpen() throws InvalidComunicationStateException {
 		return true;
 	}
 
 	@Override
-	public void doComunication() throws InvalidClientStateException, IOException {
-		throw new InvalidClientStateException("O servidor esta parado.");
+	public void doComunication() throws InvalidComunicationStateException, IOException {
+		throw new InvalidComunicationStateException("O servidor esta parado.");
 	}
 
 }

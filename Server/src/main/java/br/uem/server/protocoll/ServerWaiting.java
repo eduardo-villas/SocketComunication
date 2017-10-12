@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
+import br.uem.commons.comunication.InvalidComunicationStateException;
 import br.uem.server.Server;
 
 public class ServerWaiting implements ServerState {
@@ -16,12 +17,12 @@ public class ServerWaiting implements ServerState {
 	}
 
 	@Override
-	public void initServer() throws InvalidServerStateException {
+	public void initServer() throws InvalidComunicationStateException {
 		logger.warn("O servidor já foi iniciado.");
 	}
 
 	@Override
-	public void waitForConnection() throws InvalidServerStateException {
+	public void waitForConnection() throws InvalidComunicationStateException {
 		try {
 			server.accept();
 			server.initializeIOBuffers();
@@ -32,23 +33,23 @@ public class ServerWaiting implements ServerState {
 
 	}
 
-	String read() throws InvalidServerStateException, IOException {
-		throw new InvalidServerStateException(
+	String read() throws InvalidComunicationStateException, IOException {
+		throw new InvalidComunicationStateException(
 				"O servidor esta aguardando connexões impossivel ler mensagens do cliente");
 	}
 
-	void write(String message) throws InvalidServerStateException, IOException {
-		throw new InvalidServerStateException(
+	void write(String message) throws InvalidComunicationStateException, IOException {
+		throw new InvalidComunicationStateException(
 				"O servidor esta aguardando connexões impossivel enviar mensagens para o cliente");
 	}
 
 	@Override
-	public boolean isOpen() throws InvalidServerStateException {
+	public boolean isOpen() throws InvalidComunicationStateException {
 		return false;
 	}
 
 	@Override
-	public void doComunication() throws InvalidServerStateException, IOException {
+	public void doComunication() throws InvalidComunicationStateException, IOException {
 		write(read());
 	}
 

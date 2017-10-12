@@ -9,14 +9,16 @@ import java.net.Socket;
 
 import org.apache.log4j.Logger;
 
-import br.uem.client.protocol.ClientStoped;
 import br.uem.client.protocol.ClientState;
-import br.uem.client.protocol.InvalidClientStateException;
+import br.uem.client.protocol.ClientStoped;
 import br.uem.commons.comunication.Constants;
+import br.uem.commons.comunication.InvalidComunicationStateException;
+import br.uem.commons.comunication.OperationRunner;
 import br.uem.commons.comunication.Reader;
+import br.uem.commons.comunication.SenderReceiver;
 import br.uem.commons.comunication.Writer;
 
-public class Client implements ClientInterface {
+public class Client implements ClientInterface, SenderReceiver {
 
 	private ClientState clientState;
 	private Socket socket = null;
@@ -45,7 +47,7 @@ public class Client implements ClientInterface {
 	}
 
 	@Override
-	public void runClient() throws InvalidClientStateException {
+	public void runClient() throws InvalidComunicationStateException {
 		String message = "Tentando rodar no host:" + this.serverIp + ":" + this.serverPort + "-"
 				+ this.clientState.getClass().getSimpleName();
 		logger.info(message);
@@ -53,12 +55,12 @@ public class Client implements ClientInterface {
 	}
 
 	@Override
-	public void doComunication() throws InvalidClientStateException, IOException {
+	public void doComunication() throws InvalidComunicationStateException, IOException {
 		clientState.doComunication();
 	}
 
 	@Override
-	public boolean isOpen() throws InvalidClientStateException {
+	public boolean isOpen() throws InvalidComunicationStateException {
 		return clientState.isOpen();
 	}
 
@@ -80,6 +82,7 @@ public class Client implements ClientInterface {
 
 	}
 
+	@Override
 	public void sendMessage(String buffer) throws IOException {
 		outputMessage.write(buffer);
 		outputMessage.flush();
@@ -89,6 +92,7 @@ public class Client implements ClientInterface {
 		outputMessage.write(buffer);
 	}
 
+	@Override
 	public String getMessage() throws IOException {
 
 		int messageLength = this.inputMessage.readHeader(0, Constants.HEADER_SIZE);

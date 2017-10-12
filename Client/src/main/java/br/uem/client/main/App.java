@@ -12,8 +12,9 @@ import com.google.common.collect.Lists;
 
 import br.uem.client.Client;
 import br.uem.client.ClientRunner;
-import br.uem.client.OperationRunner;
-import br.uem.client.protocol.InvalidClientStateException;
+import br.uem.commons.comunication.InvalidComunicationStateException;
+import br.uem.commons.comunication.OperationRunner;
+import br.uem.commons.comunication.SenderReceiver;
 import br.uem.commons.stats.ElapTime;
 
 public class App {
@@ -24,36 +25,36 @@ public class App {
 
 	private static Logger logger = Logger.getLogger(App.class);
 
-	public static void main(String args[]) throws InvalidClientStateException, InterruptedException, IOException {
+	public static void main(String args[]) throws InvalidComunicationStateException, InterruptedException, IOException {
 
 		OperationRunner operationRunner = new OperationRunner() {
 
 			@Override
-			public void execute(Client client) throws Exception {
+			public void execute(SenderReceiver senderReceiver) throws Exception {
 				
 				final int transferInMB = 1;
 				
-				sendBytes(client, 32, 1, transferInMB);
-				sendBytes(client, 32, 2, transferInMB);
-				sendBytes(client, 32, 4, transferInMB);
-				sendBytes(client, 32, 8, transferInMB);
-				sendBytes(client, 32, 16, transferInMB);
+				sendBytes(senderReceiver, 32, 1, transferInMB);
+				sendBytes(senderReceiver, 32, 2, transferInMB);
+				sendBytes(senderReceiver, 32, 4, transferInMB);
+				sendBytes(senderReceiver, 32, 8, transferInMB);
+				sendBytes(senderReceiver, 32, 16, transferInMB);
 				
-				sendBytes(client, 64, 1, transferInMB);
-				sendBytes(client, 64, 2, transferInMB);
-				sendBytes(client, 64, 4, transferInMB);
-				sendBytes(client, 64, 8, transferInMB);
-				sendBytes(client, 64, 16, transferInMB);
+				sendBytes(senderReceiver, 64, 1, transferInMB);
+				sendBytes(senderReceiver, 64, 2, transferInMB);
+				sendBytes(senderReceiver, 64, 4, transferInMB);
+				sendBytes(senderReceiver, 64, 8, transferInMB);
+				sendBytes(senderReceiver, 64, 16, transferInMB);
 
-				sendBytes(client, 128, 1, transferInMB);
-				sendBytes(client, 128, 2, transferInMB);
-				sendBytes(client, 128, 4, transferInMB);
-				sendBytes(client, 128, 8, transferInMB);
-				sendBytes(client, 128, 16, transferInMB);
+				sendBytes(senderReceiver, 128, 1, transferInMB);
+				sendBytes(senderReceiver, 128, 2, transferInMB);
+				sendBytes(senderReceiver, 128, 4, transferInMB);
+				sendBytes(senderReceiver, 128, 8, transferInMB);
+				sendBytes(senderReceiver, 128, 16, transferInMB);
 				
 			}
 
-			private void sendBytes(Client client, final int SIZE_MESSAGE, final int multiplyPacket, final int transferInMB) throws IOException {
+			private void sendBytes(SenderReceiver senderReceiver, final int SIZE_MESSAGE, final int multiplyPacket, final int transferInMB) throws IOException {
 				
 				String message = String.join("", Collections.nCopies(SIZE_MESSAGE/8, "8bytesMS"));
 				final int SIZE_PACKAGE = 1024*multiplyPacket;
@@ -67,12 +68,12 @@ public class App {
 				PrintWriter printWriter = new PrintWriter(new FileWriter("stats10.log", true));
 				ElapTime elapTimeTotal = new ElapTime();
 				long timeTransferWithoutPacket = 0 ;
-				client.sendMessage(String.format("TestKey:type=%s: sizemessage=%d: packet=%d", "withoutpacket", SIZE_MESSAGE, SIZE_PACKAGE));
+				senderReceiver.sendMessage(String.format("TestKey:type=%s: sizemessage=%d: packet=%d", "withoutpacket", SIZE_MESSAGE, SIZE_PACKAGE));
 				elapTimeTotal.start();
 				for (int i = 0 ;i < TOTAL_MESSAGES; ++i) {
 					logger.info(String.format("enviando mensagem sem agregação %d: %s", i+1, message));
 					elapTime.start();
-					client.sendMessage(message);
+					senderReceiver.sendMessage(message);
 					elapTime.finish();
 					timeTransferWithoutPacket += elapTime.elapTime();
 				}
@@ -83,7 +84,7 @@ public class App {
 				
 				long timeTransferWithPacket = 0;
 				elapTimeTotal.start();
-				client.sendMessage(String.format("TestKey:type=   %s: sizemessage=%d: packet=%d", "withpacket", SIZE_MESSAGE, SIZE_PACKAGE));
+				senderReceiver.sendMessage(String.format("TestKey:type=   %s: sizemessage=%d: packet=%d", "withpacket", SIZE_MESSAGE, SIZE_PACKAGE));
 				StringBuilder sb = new StringBuilder();
 				for (int i = 0 ;i < TOTAL_MESSAGES; ++i) {
 					logger.info(String.format("enviando mensagem com agregação %d: %s", i+1, message));
@@ -91,7 +92,7 @@ public class App {
 					if (sb.length() >= SIZE_PACKAGE) {
 						logger.info(String.format("Tamanho do pacote enviado %s", sb.length()));
 						elapTime.start();
-						client.sendMessage(sb.toString());
+						senderReceiver.sendMessage(sb.toString());
 						elapTime.finish();
 						timeTransferWithPacket += elapTime.elapTime();
 						sb = new StringBuilder();
@@ -100,7 +101,7 @@ public class App {
 				if (!sb.toString().isEmpty()) {
 					logger.info(String.format("Tamanho do pacote enviado %s", sb.length()));
 					elapTime.start();
-					client.sendMessage(sb.toString());
+					senderReceiver.sendMessage(sb.toString());
 					elapTime.finish();
 					timeTransferWithPacket += elapTime.elapTime();
 				}

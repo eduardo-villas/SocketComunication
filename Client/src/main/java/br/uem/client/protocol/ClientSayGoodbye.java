@@ -3,6 +3,7 @@ package br.uem.client.protocol;
 import java.io.IOException;
 
 import br.uem.client.Client;
+import br.uem.commons.comunication.InvalidComunicationStateException;
 
 public class ClientSayGoodbye extends ClientGoodBye {
 
@@ -14,7 +15,7 @@ public class ClientSayGoodbye extends ClientGoodBye {
 	}
 
 	@Override
-	public void doComunication() throws InvalidClientStateException, IOException {
+	public void doComunication() throws InvalidComunicationStateException, IOException {
 		this.client.sendMessage("GOODBYE");
 		this.client.setState(new ClientHearsGoodbye(this.client));
 	}

@@ -3,6 +3,7 @@ package br.uem.client.protocol;
 import java.io.IOException;
 
 import br.uem.client.Client;
+import br.uem.commons.comunication.InvalidComunicationStateException;
 
 public class ClientError implements ClientState {
 
@@ -13,26 +14,26 @@ public class ClientError implements ClientState {
 	}
 
 	@Override
-	public void runClient() throws InvalidClientStateException {
+	public void runClient() throws InvalidComunicationStateException {
 		this.client.setState(new ClientStoped(client));
 		this.client.runClient();
 	}
 
 	@Override
-	public boolean isOpen() throws InvalidClientStateException {
+	public boolean isOpen() throws InvalidComunicationStateException {
 		return false;
 	}
 
-	void read() throws InvalidClientStateException, IOException {
-		throw new InvalidClientStateException("Estado de cliente inválido para operação.");
+	void read() throws InvalidComunicationStateException, IOException {
+		throw new InvalidComunicationStateException("Estado de cliente inválido para operação.");
 	}
 
-	void write() throws InvalidClientStateException, IOException {
-		throw new InvalidClientStateException("Estado de cliente inválido para operação.");
+	void write() throws InvalidComunicationStateException, IOException {
+		throw new InvalidComunicationStateException("Estado de cliente inválido para operação.");
 	}
 
 	@Override
-	public void doComunication() throws InvalidClientStateException, IOException {
+	public void doComunication() throws InvalidComunicationStateException, IOException {
 		write();
 		read();
 	}

@@ -14,14 +14,16 @@ import javax.net.ServerSocketFactory;
 import org.apache.log4j.Logger;
 
 import br.uem.commons.comunication.Constants;
+import br.uem.commons.comunication.InvalidComunicationStateException;
+import br.uem.commons.comunication.OperationRunner;
 import br.uem.commons.comunication.Reader;
+import br.uem.commons.comunication.SenderReceiver;
 import br.uem.commons.comunication.Writer;
 import br.uem.server.protocoll.ConnectionIsClose;
-import br.uem.server.protocoll.InvalidServerStateException;
 import br.uem.server.protocoll.ServerState;
 import br.uem.server.protocoll.ServerStoped;
 
-public class Server implements ServerInterface {
+public class Server implements ServerInterface, SenderReceiver {
 
 	ServerState serverState;
 	Socket socket = null;
@@ -49,17 +51,17 @@ public class Server implements ServerInterface {
 	}
 
 	@Override
-	public void initServer() throws InvalidServerStateException, BindException {
+	public void initServer() throws InvalidComunicationStateException, BindException {
 		serverState.initServer();
 	}
 
 	@Override
-	public boolean isOpen() throws InvalidServerStateException {
+	public boolean isOpen() throws InvalidComunicationStateException {
 		return serverState.isOpen();
 	}
 
 	@Override
-	public void waitForConnection() throws InvalidServerStateException {
+	public void waitForConnection() throws InvalidComunicationStateException {
 		serverState.waitForConnection();
 	}
 
@@ -132,7 +134,7 @@ public class Server implements ServerInterface {
 	}
 
 	@Override
-	public void doComunication() throws InvalidServerStateException, IOException {
+	public void doComunication() throws InvalidComunicationStateException, IOException {
 		serverState.doComunication();
 	}
 
