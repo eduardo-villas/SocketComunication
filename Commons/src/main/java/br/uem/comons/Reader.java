@@ -37,7 +37,7 @@ public class Reader extends java.io.Reader {
 	
 	public int readHeader(int off, int len) throws IOException {
 		char buffer[] = readBytes(off, len);
-		String stringPacketSize = new String(buffer, 0, 4).trim();
+		String stringPacketSize = new String(buffer, 0, Constants.HEADER_SIZE).trim();
 		int sizePacket = Integer.parseInt(stringPacketSize); 
 		return sizePacket;
 	}

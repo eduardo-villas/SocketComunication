@@ -86,10 +86,10 @@ public class Server implements ServerInterface {
 	}
 
 	public String getMessage() throws IOException {
-		
-		int messageLength = this.inputMessage.readHeader(0, 4);
-		char buffer[] = this.inputMessage.readBytes(4, messageLength); 
-		String message = new String(buffer, 0, messageLength-4);
+
+		int messageLength = this.inputMessage.readHeader(0, Constants.HEADER_SIZE);
+		char buffer[] = this.inputMessage.readBytes(Constants.HEADER_SIZE, messageLength); 
+		String message = new String(buffer, 0, messageLength-Constants.HEADER_SIZE);
 
 		if (isGoodbye(message))
 			throw new ConnectionIsClose();

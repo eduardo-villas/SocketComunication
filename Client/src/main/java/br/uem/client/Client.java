@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import br.uem.client.protocol.ClientStoped;
 import br.uem.client.protocol.ClientState;
 import br.uem.client.protocol.InvalidClientStateException;
+import br.uem.comons.Constants;
 import br.uem.comons.Reader;
 import br.uem.comons.Writer;
 
@@ -90,9 +91,9 @@ public class Client implements ClientInterface {
 
 	public String getMessage() throws IOException {
 
-		int messageLength = this.inputMessage.readHeader(0, 4);
-		char buffer[] = this.inputMessage.readBytes(4, messageLength); 
-		String message = new String(buffer, 0, messageLength-4);
+		int messageLength = this.inputMessage.readHeader(0, Constants.HEADER_SIZE);
+		char buffer[] = this.inputMessage.readBytes(Constants.HEADER_SIZE, messageLength); 
+		String message = new String(buffer, 0, messageLength-Constants.HEADER_SIZE);
 
 		return message;
 		

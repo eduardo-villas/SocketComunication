@@ -30,7 +30,7 @@ public class Writer extends java.io.Writer {
 	@Override
 	public void write(String buffer) throws IOException {
 		buffer = buffer+"\n";
-		buffer = String.format("%4d%s", buffer.length()+4, buffer);
+		buffer = String.format("%"+Constants.HEADER_SIZE+"d%s", buffer.length()+Constants.HEADER_SIZE, buffer);
 		super.write(buffer);
 		this.bufferedWriter.flush();
 	}
