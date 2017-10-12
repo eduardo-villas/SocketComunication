@@ -7,10 +7,8 @@ import javax.net.ServerSocketFactory;
 import org.apache.log4j.Logger;
 
 import br.uem.commons.comunication.OperationRunner;
+import br.uem.commons.comunication.ReceiverMessages;
 import br.uem.commons.comunication.SenderReceiver;
-import br.uem.commons.stats.ElapTime;
-import br.uem.commons.stats.Statistic;
-import br.uem.commons.stats.StatsPrinter;
 import br.uem.server.Server;
 import br.uem.server.ServerRunner;
 
@@ -32,33 +30,11 @@ public class App {
 
 		OperationRunner operationRunner = new OperationRunner() {
 
-			Statistic statistic = new Statistic();
-			ElapTime elapTime = new ElapTime();
-
 			@Override
 			public void execute(SenderReceiver senderReceiver) throws Exception {
 
-				int cont = 0;
-				this.statistic.initialize();
-
-				while (senderReceiver.isOpen()) {
-
-					try {
-
-						elapTime.start();
-						String message = senderReceiver.getMessage();
-						elapTime.finish();
-						statistic.analyze(elapTime, message);
-						logger.info(String.format("mensagem %d enviada pelo cliente %s", ++cont, message));
-
-					} catch (Exception e) {
-
-						StatsPrinter statsPrinter = new StatsPrinter("new-stats-server.log");
-						statsPrinter.printStats(statistic);
-						throw e;
-
-					}
-				}
+				ReceiverMessages receiverMessages = new ReceiverMessages(logger);
+				receiverMessages.receive(senderReceiver);
 			}
 
 		};
