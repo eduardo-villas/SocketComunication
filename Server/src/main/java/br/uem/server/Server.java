@@ -83,6 +83,8 @@ public class Server implements ServerInterface, SenderReceiver {
 	}
 
 	public void sendMessage(String buffer) throws IOException {
+		if (buffer.isEmpty())
+			throw new RuntimeException("Erro buffer vazio");
 		outputMessage.write(buffer);
 	}
 

@@ -34,12 +34,14 @@ public class ReceiverMessages {
 				statistic.analyze(elapTime, message);
 				logger.info(String.format("mensagem %d enviada pelo cliente %s", ++cont, message));
 
-			} catch (Exception e) {
-
+			} catch (ConnectionIsCloseException e) {
 				StatsPrinter statsPrinter = new StatsPrinter(this.fileLogName);
 				statsPrinter.printStats(statistic);
+				System.out.println("Cliente terminado. Estatisticas em "+statsPrinter.getFileLogName());
 				throw e;
-
+			} catch (Exception e) {
+				logger.error("Erro na comunicação com o servidor", e);
+				throw e;
 			}
 		}
 

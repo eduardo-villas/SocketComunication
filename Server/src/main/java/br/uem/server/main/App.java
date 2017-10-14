@@ -7,8 +7,11 @@ import javax.net.ServerSocketFactory;
 import org.apache.log4j.Logger;
 
 import br.uem.commons.comunication.OperationRunner;
+import br.uem.commons.comunication.PacketCalculation;
 import br.uem.commons.comunication.SenderMessages;
 import br.uem.commons.comunication.SenderReceiver;
+import br.uem.commons.stats.Statistic;
+import br.uem.commons.stats.StatsPrinter;
 import br.uem.server.Server;
 import br.uem.server.ServerRunner;
 
@@ -35,27 +38,34 @@ public class App {
 
 				final int transferInMB = 1;
 				
-				SenderMessages senderMessages = new SenderMessages(logger, "new-stats-server-sender.log");
+				Statistic statistic = new Statistic();
 				
-				senderMessages.sendBytes(senderReceiver, 32, 1, transferInMB);
-				senderMessages.sendBytes(senderReceiver, 32, 2, transferInMB);
-				senderMessages.sendBytes(senderReceiver, 32, 4, transferInMB);
-				senderMessages.sendBytes(senderReceiver, 32, 8, transferInMB);
-				senderMessages.sendBytes(senderReceiver, 32, 16, transferInMB);
+				SenderMessages senderMessages = new SenderMessages(logger, statistic);
 				
-				senderMessages.sendBytes(senderReceiver, 64, 1, transferInMB);
-				senderMessages.sendBytes(senderReceiver, 64, 2, transferInMB);
-				senderMessages.sendBytes(senderReceiver, 64, 4, transferInMB);
-				senderMessages.sendBytes(senderReceiver, 64, 8, transferInMB);
-				senderMessages.sendBytes(senderReceiver, 64, 16, transferInMB);
+				statistic.initialize();
+				senderMessages.sendBytes(senderReceiver, new PacketCalculation(32, 1, transferInMB));
+				senderMessages.sendBytes(senderReceiver, new PacketCalculation(32, 2, transferInMB));
+				senderMessages.sendBytes(senderReceiver, new PacketCalculation(32, 4, transferInMB));
+				senderMessages.sendBytes(senderReceiver, new PacketCalculation(32, 8, transferInMB));
+				senderMessages.sendBytes(senderReceiver, new PacketCalculation(32, 16, transferInMB));
+				
+				senderMessages.sendBytes(senderReceiver, new PacketCalculation(64, 1, transferInMB));
+				senderMessages.sendBytes(senderReceiver, new PacketCalculation(64, 2, transferInMB));
+				senderMessages.sendBytes(senderReceiver, new PacketCalculation(64, 4, transferInMB));
+				senderMessages.sendBytes(senderReceiver, new PacketCalculation(64, 8, transferInMB));
+				senderMessages.sendBytes(senderReceiver, new PacketCalculation(64, 16, transferInMB));
 
-				senderMessages.sendBytes(senderReceiver, 128, 1, transferInMB);
-				senderMessages.sendBytes(senderReceiver, 128, 2, transferInMB);
-				senderMessages.sendBytes(senderReceiver, 128, 4, transferInMB);
-				senderMessages.sendBytes(senderReceiver, 128, 8, transferInMB);
-				senderMessages.sendBytes(senderReceiver, 128, 16, transferInMB);
+				senderMessages.sendBytes(senderReceiver, new PacketCalculation(128, 1, transferInMB));
+				senderMessages.sendBytes(senderReceiver, new PacketCalculation(128, 2, transferInMB));
+				senderMessages.sendBytes(senderReceiver, new PacketCalculation(128, 4, transferInMB));
+				senderMessages.sendBytes(senderReceiver, new PacketCalculation(128, 8, transferInMB));
+				senderMessages.sendBytes(senderReceiver, new PacketCalculation(128, 16, transferInMB));
 
-			}
+				String fileLogName = "new-stats-server-sender.log";
+				StatsPrinter statsPrinter = new StatsPrinter(fileLogName);
+				statsPrinter.printStats(statistic);
+				System.out.println("Servidor terminado. Estatisticas em " + statsPrinter.getFileLogName());
+}
 
 		};
 

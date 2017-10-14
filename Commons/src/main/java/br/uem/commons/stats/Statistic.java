@@ -1,44 +1,63 @@
 package br.uem.commons.stats;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Statistic {
 
-	private Map<String, Long> stats = new LinkedHashMap<>();
+	private List<StatisticInfo> stats;
 	private long currentTimeTransfer = 0L;
 	private String currentKey = null;
+	private long currentTotalTimeTransfer = 0L;
+	private ElapTime elapTimeTotal;
 	
 	public Statistic() {
 		
 	}
 
 	public void initialize() {
-		this.stats = new LinkedHashMap<>();
+		stats = new ArrayList<>(32);
 		this.currentTimeTransfer = 0L;
+		this.currentTotalTimeTransfer = 0L;
 		this.currentKey = null;
+		this.elapTimeTotal = new ElapTime();
+		elapTimeTotal.start();
 	}
 
 	public void analyze(ElapTime elapTime, String message) {
-
+		
 		if (message.startsWith("TestKey")) {
 			if (currentTimeTransfer != 0) {
-				stats.put(currentKey, currentTimeTransfer);
+				finishCurrentTotalTime();
+				addCurrentStatsInfo();
 			}
+
+			elapTimeTotal.start();
 			currentKey = message;
 			currentTimeTransfer = 0L;
+			currentTotalTimeTransfer = 0L;
 		}
 		currentTimeTransfer += elapTime.elapTime();
 
 	}
 
-	public Map<String, Long> getStats() {
-		finalyze();
+	public List<StatisticInfo> getStats() {
+		finishCurrentTotalTime();
+		addCurrentStatsInfo();
 		return this.stats;
 	}
 
-	private void finalyze() {
-		this.stats.put(currentKey, currentTimeTransfer);
+	private void finishCurrentTotalTime() {
+		elapTimeTotal.finish();
+		currentTotalTimeTransfer = elapTimeTotal.elapTime();
+	}
+
+	private void addCurrentStatsInfo() {
+		StatisticInfo statisticInfo = new StatisticInfo();
+		statisticInfo.setKeyInfo(currentKey);
+		statisticInfo.setTimeTransfer(currentTimeTransfer);
+		statisticInfo.setTimeTotalTransfer(currentTotalTimeTransfer);
+		this.stats.add(statisticInfo);
 	}
 
 }

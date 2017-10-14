@@ -4,33 +4,41 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
-import java.util.Map;
+import java.util.List;
 
 public class StatsPrinter {
 
-	private String fileName;
+	private String fileLogName;
 
-	public StatsPrinter(String fileName) {
-		this.fileName = fileName;
+	public StatsPrinter(String fileLogName) {
+		this.fileLogName = fileLogName;
 	}
 
-	public void printStats(Statistic statistic) throws IOException {
-
-		try (final PrintWriter printWriter = new PrintWriter(new FileWriter(fileName, true))) {
-			Map<String, Long> stats = statistic.getStats();
-			Iterator<String> iterator = stats.keySet().iterator();
+	public void printStats(Statistic statistic) throws IOException, Exception {
+		
+		try (final PrintWriter printWriter = new PrintWriter(new FileWriter(fileLogName, true))) {
+			
+			List<StatisticInfo> stats = statistic.getStats();
+			Iterator<StatisticInfo> iterator = stats.iterator();
+			
 			while (iterator.hasNext()) {
 
-				String withoutKey = iterator.next();
-				long timeTransferWithoutPacket = stats.get(withoutKey);
+				StatisticInfo statisticInfo1 = iterator.next();
+				long timeTransferWithoutPacket = statisticInfo1.getTimeTransfer();
+				long timeTransferWithoutPacketTotal = statisticInfo1.getTimeTotalTransfer();
 
-				String withKey = iterator.next();
-				long timeTransferWithPacket = stats.get(withKey);
+				StatisticInfo statisticInfo2 = iterator.next();
+				long timeTransferWithPacket = statisticInfo2.getTimeTransfer();
+				long timeTransferWithPacketTotal = statisticInfo2.getTimeTotalTransfer();
 
-				printWriter.write(String.format("%s= %d\n", withoutKey, timeTransferWithoutPacket));
-				printWriter.write(String.format("%s= %d\n", withKey, timeTransferWithPacket));
-				printWriter.write(String.format("Percentual transferencia                                 %4.3f\n",
-						((new Double(timeTransferWithPacket) / new Double(timeTransferWithoutPacket) * 100) - 100)));
+				printStatistic(printWriter, statisticInfo1, timeTransferWithoutPacket, statisticInfo2,
+						timeTransferWithPacket, "Percentual transferencia");
+
+				printStatistic(printWriter, statisticInfo1, timeTransferWithoutPacketTotal, statisticInfo2,
+						timeTransferWithPacketTotal, "Percentual transferencia total");
+				
+				printWriter.write("\n");
+
 			}
 
 			printWriter.write("\n");
@@ -39,6 +47,20 @@ public class StatsPrinter {
 			printWriter.close();
 			
 		}
+	}
+
+	private void printStatistic(final PrintWriter printWriter, StatisticInfo statisticInfo1,
+			long timeTransferWithoutPacket, StatisticInfo statisticInfo2, long timeTransferWithPacket,
+			String title) {
+//		printWriter.write(title+"\n");
+		printWriter.write(String.format("%s= %d\n", statisticInfo1.getKeyInfo(), timeTransferWithoutPacket));
+		printWriter.write(String.format("%s= %d\n", statisticInfo2.getKeyInfo(), timeTransferWithPacket));
+		printWriter.write(String.format("%s                                 %4.3f\n", title,
+				((new Double(timeTransferWithPacket) / new Double(timeTransferWithoutPacket) * 100) - 100)));
+	}
+
+	public String getFileLogName() {
+		return this.fileLogName;
 	}
 
 }
