@@ -13,7 +13,6 @@ import javax.net.ServerSocketFactory;
 
 import org.apache.log4j.Logger;
 
-import br.uem.commons.comunication.ConnectionIsCloseException;
 import br.uem.commons.comunication.Constants;
 import br.uem.commons.comunication.InvalidComunicationStateException;
 import br.uem.commons.comunication.OperationRunner;
@@ -93,14 +92,7 @@ public class Server implements ServerInterface, SenderReceiver {
 		char buffer[] = this.inputMessage.readBytes(Constants.HEADER_SIZE, messageLength); 
 		String message = new String(buffer, 0, messageLength-Constants.HEADER_SIZE);
 
-		if (isGoodbye(message))/* TODO: mover esse if para o cliente. */
-			throw new ConnectionIsCloseException();
-		
 		return message;
-	}
-
-	private boolean isGoodbye(String message) {
-		return Constants.GOODBYE.equals(message);
 	}
 
 	public void initializeIOBuffers() throws IOException {

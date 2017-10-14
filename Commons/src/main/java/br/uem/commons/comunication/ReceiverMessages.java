@@ -13,9 +13,11 @@ public class ReceiverMessages {
 	private Logger logger;
 	private Statistic statistic = new Statistic();
 	private ElapTime elapTime = new ElapTime();
+	private String fileLogName;
 
-	public ReceiverMessages(Logger logger) {
+	public ReceiverMessages(Logger logger, String fileLogName) {
 		this.logger = logger;
+		this.fileLogName = fileLogName;
 	}
 
 	final public void receive(SenderReceiver senderReceiver) throws InvalidComunicationStateException, IOException, Exception {
@@ -34,7 +36,7 @@ public class ReceiverMessages {
 
 			} catch (Exception e) {
 
-				StatsPrinter statsPrinter = new StatsPrinter("new-stats-server.log");
+				StatsPrinter statsPrinter = new StatsPrinter(this.fileLogName);
 				statsPrinter.printStats(statistic);
 				throw e;
 

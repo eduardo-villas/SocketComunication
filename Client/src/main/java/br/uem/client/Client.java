@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import br.uem.client.protocol.ClientState;
 import br.uem.client.protocol.ClientStoped;
+import br.uem.commons.comunication.ConnectionIsCloseException;
 import br.uem.commons.comunication.Constants;
 import br.uem.commons.comunication.InvalidComunicationStateException;
 import br.uem.commons.comunication.OperationRunner;
@@ -98,6 +99,9 @@ public class Client implements ClientInterface, SenderReceiver {
 		int messageLength = this.inputMessage.readHeader(0, Constants.HEADER_SIZE);
 		char buffer[] = this.inputMessage.readBytes(Constants.HEADER_SIZE, messageLength); 
 		String message = new String(buffer, 0, messageLength-Constants.HEADER_SIZE);
+
+		if (Constants.isGoodbye(message))
+			throw new ConnectionIsCloseException();
 
 		return message;
 		

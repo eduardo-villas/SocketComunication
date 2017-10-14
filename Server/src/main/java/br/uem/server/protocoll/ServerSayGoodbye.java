@@ -13,17 +13,13 @@ public class ServerSayGoodbye extends ServerGoodbye {
 
 	@Override
 	public void doComunication() throws InvalidComunicationStateException, IOException {
-		write("GOODBYE");
+		this.server.sendMessage("GOODBYE");
+		this.server.setState(new ServerHearsGoodbye(this.server));
 	}
 
-	private void write(String message) throws InvalidComunicationStateException, IOException {
-		server.sendMessage("GOODBYE");
-		close();
-	}
-
-	public void close() throws InvalidComunicationStateException {
-		server.closeResources();
-		server.setState(new ServerWaiting(server));
-	}
+//	public void close() throws InvalidComunicationStateException {
+//		server.closeResources();
+//		server.setState(new ServerWaiting(server));
+//	}
 
 }

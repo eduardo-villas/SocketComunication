@@ -16,9 +16,11 @@ public class SenderMessages {
 
 	
 	private Logger logger;
+	private String fileLogName;
 
-	public SenderMessages(Logger logger) {
+	public SenderMessages(Logger logger, String fileLogName) {
 		this.logger = logger;
+		this.fileLogName = fileLogName;
 	}
 
 	final public void sendBytes(SenderReceiver senderReceiver, final int SIZE_MESSAGE, final int multiplyPacket, final int transferInMB) throws IOException {
@@ -32,7 +34,7 @@ public class SenderMessages {
 		final int TOTAL_MESSAGES = (transferInMB * (1024*1024)) / SIZE_MESSAGE;
 		final int MB_TRANSFER = (TOTAL_MESSAGES *  SIZE_MESSAGE) / (1024*1024);// QUANTIDADE EM MB para mensagens de 32 bytes 50mb
 		
-		PrintWriter printWriter = new PrintWriter(new FileWriter("stats10.log", true));
+		PrintWriter printWriter = new PrintWriter(new FileWriter(this.fileLogName, true));
 		ElapTime elapTimeTotal = new ElapTime();
 		long timeTransferWithoutPacket = 0 ;
 		senderReceiver.sendMessage(String.format("TestKey:type=%s: sizemessage=%d: packet=%d", "withoutpacket", SIZE_MESSAGE, SIZE_PACKAGE));
