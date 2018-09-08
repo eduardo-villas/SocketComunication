@@ -96,15 +96,25 @@ public class Client implements ClientInterface, SenderReceiver {
 	@Override
 	public String getMessage() throws IOException {
 
-		int messageLength = this.inputMessage.readHeader(0, Constants.HEADER_SIZE);
-		char buffer[] = this.inputMessage.readBytes(Constants.HEADER_SIZE, messageLength); 
-		String message = new String(buffer, 0, messageLength-Constants.HEADER_SIZE);
+		String message;
 
-		if (Constants.isGoodbye(message))
-			throw new ConnectionIsCloseException();
+		try {
+			int messageLength = this.inputMessage.readHeader(0, Constants.HEADER_SIZE);
+			char buffer[] = this.inputMessage.readBytes(Constants.HEADER_SIZE, messageLength);
+			message = new String(buffer, 0, messageLength - Constants.HEADER_SIZE);
+
+			if (Constants.isGoodbye(message)) {
+				throw new ConnectionIsCloseException();
+			}
+		} catch (Exception e) {
+			if (!(e instanceof ConnectionIsCloseException)) {
+				logger.error("Erro ao ler a mensagen do sevidor.", e);
+			}
+			throw new ConnectionIsCloseException("Erro ao ler a mensagen do sevidor.", e);
+		}
 
 		return message;
-		
+
 	}
 
 	public void initializeIOBuffers() throws IOException {
@@ -129,7 +139,7 @@ public class Client implements ClientInterface, SenderReceiver {
 	public void setOperationRunner(OperationRunner operationRunner) {
 		this.operationRunner = operationRunner;
 	}
-	
+
 	public OperationRunner getOperationRunner() {
 		return this.operationRunner;
 	}
@@ -149,5 +159,5 @@ public class Client implements ClientInterface, SenderReceiver {
 	public void setServerPort(int serverPort) {
 		this.serverPort = serverPort;
 	}
-	
+
 }

@@ -10,7 +10,7 @@ public interface ServerInterface {
 	public void initServer() throws InvalidComunicationStateException, BindException;
 
 	public void waitForConnection() throws InvalidComunicationStateException;
-	
+
 	public void doComunication() throws InvalidComunicationStateException, IOException;
 
 	public boolean isOpen() throws InvalidComunicationStateException;

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
+import br.uem.commons.comunication.ConnectionIsCloseException;
 import br.uem.commons.comunication.InvalidComunicationStateException;
 import br.uem.server.Server;
 
@@ -36,8 +37,11 @@ public class ServerReady implements ServerState {
 		try {
 			this.server.getOperationRunner().execute(this.server);
 			this.server.setState(new ServerSayGoodbye(this.server));
+		} catch (ConnectionIsCloseException e) {
+			this.server.setState(new ServerWaiting(this.server));
+			logger.error("Erro na execução da operação do servidor. A conexão foi fechada.", e);
 		} catch (Exception e) {
-			logger.error("Erro na execução da operação do cliente", e);
+			logger.error("Erro na execução da operação do servidor", e);
 		} 
 	}
 

@@ -32,7 +32,7 @@ public class ClientReady implements ClientState {
 		try {
 			this.client.getOperationRunner().execute(this.client);
 		} catch (ConnectionIsCloseException e) {
-			logger.info("A conexao foi fechada pelo cliente", e);
+			logger.info("A conexao foi fechada pelo servidor");
 		} catch (Exception e) {
 			logger.error("Ocorreu um erro na execução da operação.", e);
 		} finally {

@@ -35,8 +35,10 @@ public class ServerRunner {
 				server.doComunication();
 			}
 		} catch (InvalidComunicationStateException e) {
+			server.setHasError(true);
 			logger.error("Erro na comunicacao com o cliente ", e);
 		} catch (IOException e) {
+			server.setHasError(true);
 			logger.error("Erro na comunicacao com o cliente ", e);
 		}
 	}

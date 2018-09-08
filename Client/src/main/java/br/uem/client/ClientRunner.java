@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import br.uem.commons.comunication.InvalidComunicationStateException;
 import br.uem.commons.comunication.OperationRunner;
 
+
 public class ClientRunner {
 
 	Logger logger = Logger.getLogger(ClientRunner.class);
@@ -38,6 +39,11 @@ public class ClientRunner {
 		} catch (IOException e) {
 			logger.error("Erro na comunicacao com o cliente ", e);
 		}
+	}
+
+	public void setOperation(OperationRunner operationRunner) {
+		this.operationRunner = operationRunner;
+		
 	}
 
 }

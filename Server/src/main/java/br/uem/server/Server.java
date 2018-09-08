@@ -13,6 +13,7 @@ import javax.net.ServerSocketFactory;
 
 import org.apache.log4j.Logger;
 
+import br.uem.commons.comunication.ConnectionIsCloseException;
 import br.uem.commons.comunication.Constants;
 import br.uem.commons.comunication.InvalidComunicationStateException;
 import br.uem.commons.comunication.OperationRunner;
@@ -90,9 +91,16 @@ public class Server implements ServerInterface, SenderReceiver {
 
 	public String getMessage() throws IOException {
 
-		int messageLength = this.inputMessage.readHeader(0, Constants.HEADER_SIZE);
-		char buffer[] = this.inputMessage.readBytes(Constants.HEADER_SIZE, messageLength); 
-		String message = new String(buffer, 0, messageLength-Constants.HEADER_SIZE);
+		String message;
+
+		try {
+			int messageLength = this.inputMessage.readHeader(0, Constants.HEADER_SIZE);
+			char buffer[] = this.inputMessage.readBytes(Constants.HEADER_SIZE, messageLength);
+			message = new String(buffer, 0, messageLength - Constants.HEADER_SIZE);
+		} catch (Exception e) {
+			logger.error("Erro ao ler a mensagen do cliente.", e);
+			throw new ConnectionIsCloseException("Erro ao ler a mensagen do cliente.", e);
+		}
 
 		return message;
 	}

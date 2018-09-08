@@ -7,5 +7,9 @@ public class InvalidComunicationStateException extends Exception {
 	public InvalidComunicationStateException(String message) {
 		super(message);
 	}
+	
+	public InvalidComunicationStateException(String message, Exception e) {
+		super(message, e);
+	}
 
 }

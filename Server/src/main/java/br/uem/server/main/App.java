@@ -6,6 +6,7 @@ import javax.net.ServerSocketFactory;
 
 import org.apache.log4j.Logger;
 
+import br.uem.commons.comunication.InvalidComunicationStateException;
 import br.uem.commons.comunication.OperationRunner;
 import br.uem.commons.comunication.PacketCalculation;
 import br.uem.commons.comunication.SenderMessages;
@@ -23,9 +24,10 @@ public class App {
 	public static void main(String args[]) throws Exception {
 
 		Server server = new Server(ServerSocketFactory.getDefault(), App.PORT);
-
 		try {
 			server.initServer();
+		} catch (InvalidComunicationStateException e) {
+			logger.error("Erro. Estado inválido", e);
 		} catch (BindException bindException) {
 			logger.error(String.format("Erro. porta %s em uso.", server.getPort()), bindException);
 			throw bindException;
@@ -37,18 +39,18 @@ public class App {
 			public void execute(SenderReceiver senderReceiver) throws Exception {
 
 				final int transferInMB = 1;
-				
+
 				Statistic statistic = new Statistic();
-				
+
 				SenderMessages senderMessages = new SenderMessages(logger, statistic);
-				
+
 				statistic.initialize();
 				senderMessages.sendBytes(senderReceiver, new PacketCalculation(32, 1, transferInMB));
 				senderMessages.sendBytes(senderReceiver, new PacketCalculation(32, 2, transferInMB));
 				senderMessages.sendBytes(senderReceiver, new PacketCalculation(32, 4, transferInMB));
 				senderMessages.sendBytes(senderReceiver, new PacketCalculation(32, 8, transferInMB));
 				senderMessages.sendBytes(senderReceiver, new PacketCalculation(32, 16, transferInMB));
-				
+
 				senderMessages.sendBytes(senderReceiver, new PacketCalculation(64, 1, transferInMB));
 				senderMessages.sendBytes(senderReceiver, new PacketCalculation(64, 2, transferInMB));
 				senderMessages.sendBytes(senderReceiver, new PacketCalculation(64, 4, transferInMB));
@@ -65,7 +67,7 @@ public class App {
 				StatsPrinter statsPrinter = new StatsPrinter(fileLogName);
 				statsPrinter.printStats(statistic);
 				System.out.println("Servidor terminado. Estatisticas em " + statsPrinter.getFileLogName());
-}
+			}
 
 		};
 

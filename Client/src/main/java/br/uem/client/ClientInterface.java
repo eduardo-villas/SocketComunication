@@ -8,7 +8,7 @@ public interface ClientInterface {
 
 	public void runClient() throws InvalidComunicationStateException;
 
-	public void doComunication()  throws InvalidComunicationStateException, IOException;
+	public void doComunication() throws InvalidComunicationStateException, IOException;
 
 	public boolean isOpen() throws InvalidComunicationStateException;
 
