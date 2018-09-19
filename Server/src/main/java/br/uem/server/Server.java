@@ -13,13 +13,16 @@ import javax.net.ServerSocketFactory;
 
 import org.apache.log4j.Logger;
 
+import com.google.common.base.Preconditions;
+
 import br.uem.commons.comunication.ConnectionIsCloseException;
 import br.uem.commons.comunication.Constants;
 import br.uem.commons.comunication.InvalidComunicationStateException;
 import br.uem.commons.comunication.OperationRunner;
-import br.uem.commons.comunication.Reader;
+import br.uem.commons.comunication.MyReader;
 import br.uem.commons.comunication.SenderReceiver;
 import br.uem.commons.comunication.Writer;
+import br.uem.commons.comunication.exceptions.InvalidMessageLength;
 import br.uem.server.protocoll.ServerState;
 import br.uem.server.protocoll.ServerStoped;
 
@@ -29,7 +32,7 @@ public class Server implements ServerInterface, SenderReceiver {
 	Socket socket = null;
 	ServerSocket serverSocket;
 	ServerSocketFactory serverSocketFactory;
-	private Reader inputMessage;
+	private MyReader inputMessage;
 	private Writer outputMessage;
 	private Logger logger = Logger.getLogger(Server.class);
 	private OperationRunner operationRunner;
@@ -86,6 +89,7 @@ public class Server implements ServerInterface, SenderReceiver {
 	public void sendMessage(String buffer) throws IOException {
 		if (buffer.isEmpty())
 			throw new RuntimeException("Erro buffer vazio");
+		Preconditions.checkState(outputMessage != null, "Erro. O objeto de mensagem não pode ser null. Provavelmente a conexão foi fechada.");
 		outputMessage.write(buffer);
 	}
 
@@ -95,6 +99,11 @@ public class Server implements ServerInterface, SenderReceiver {
 
 		try {
 			int messageLength = this.inputMessage.readHeader(0, Constants.HEADER_SIZE);
+			if (messageLength <= 0) {
+				InvalidMessageLength invalidMessageLengthException = new InvalidMessageLength("Erro. Tamanho da mensagem inválida.", messageLength);
+				logger.error("Erro. Tamanho da mensagem inválida.", invalidMessageLengthException);
+				throw invalidMessageLengthException;
+			}
 			char buffer[] = this.inputMessage.readBytes(Constants.HEADER_SIZE, messageLength);
 			message = new String(buffer, 0, messageLength - Constants.HEADER_SIZE);
 		} catch (Exception e) {
@@ -107,7 +116,7 @@ public class Server implements ServerInterface, SenderReceiver {
 
 	public void initializeIOBuffers() throws IOException {
 		try {
-			inputMessage = new Reader(new BufferedReader(new InputStreamReader(socket.getInputStream())));
+			inputMessage = new MyReader(new BufferedReader(new InputStreamReader(socket.getInputStream())));
 			outputMessage = new Writer(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
 		} catch (IOException e) {
 			logger.error("Erro ao inicializar os canais de entrada e saida.", e);

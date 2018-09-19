@@ -9,13 +9,15 @@ import java.net.Socket;
 
 import org.apache.log4j.Logger;
 
+import com.google.common.base.Preconditions;
+
 import br.uem.client.protocol.ClientState;
 import br.uem.client.protocol.ClientStoped;
 import br.uem.commons.comunication.ConnectionIsCloseException;
 import br.uem.commons.comunication.Constants;
 import br.uem.commons.comunication.InvalidComunicationStateException;
 import br.uem.commons.comunication.OperationRunner;
-import br.uem.commons.comunication.Reader;
+import br.uem.commons.comunication.MyReader;
 import br.uem.commons.comunication.SenderReceiver;
 import br.uem.commons.comunication.Writer;
 
@@ -23,7 +25,7 @@ public class Client implements ClientInterface, SenderReceiver {
 
 	private ClientState clientState;
 	private Socket socket = null;
-	private Reader inputMessage;
+	private MyReader inputMessage;
 	private Writer outputMessage;
 	private Logger logger = Logger.getLogger(Client.class);
 	private String parameters;
@@ -119,7 +121,7 @@ public class Client implements ClientInterface, SenderReceiver {
 
 	public void initializeIOBuffers() throws IOException {
 		try {
-			inputMessage = new Reader(new BufferedReader(new InputStreamReader(getSocket().getInputStream())));
+			inputMessage = new MyReader(new BufferedReader(new InputStreamReader(getSocket().getInputStream())));
 			outputMessage = new Writer(new BufferedWriter(new OutputStreamWriter(getSocket().getOutputStream())));
 		} catch (IOException e) {
 			logger.error("Erro ao inicializar os canais de entrada e saida.", e);

@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
+import com.google.common.base.Preconditions;
+
 import br.uem.commons.comunication.InvalidComunicationStateException;
 import br.uem.commons.comunication.OperationRunner;
 
@@ -18,6 +20,7 @@ public class ClientRunner {
 	}
 
 	public void runClient(Client client) {
+		Preconditions.checkArgument(operationRunner != null, "Operatin runner não pode ser nulo");
 		client.setOperationRunner(operationRunner);
 		try {
 			client.runClient();

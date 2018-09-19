@@ -3,11 +3,15 @@ package br.uem.commons.comunication;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class Reader extends java.io.Reader {
+import org.apache.log4j.Logger;
 
+import com.google.common.base.Preconditions;
+
+public class MyReader extends java.io.Reader {
+ 
 	private BufferedReader bufferedReader;
 
-	public Reader(BufferedReader bufferedReader) {
+	public MyReader(BufferedReader bufferedReader) {
 		super(bufferedReader);
 		this.bufferedReader = bufferedReader;
 	}
@@ -19,15 +23,26 @@ public class Reader extends java.io.Reader {
 
 	@Override
 	public int read(char[] cbuf, int off, int len) throws IOException {
+		int messageLength = 0;
+		try {
+			messageLength = tryRead(cbuf, off, len);
+		} catch (Exception e) {
+			Logger.getLogger(MyReader.class).error("Erro ao tentar ler os dados.", e);
+			throw e;
+		}
 		
+		return messageLength;
+	}
+
+	public int tryRead(char[] cbuf, int off, int len) throws IOException {
 		int offset = off;
 		int messageLength = 0;
 		do {
+			Preconditions.checkState(offset >= 0, "Erro. O offset igual a {0} não pode ser menor que zero.", offset);
 			offset = this.bufferedReader.read(cbuf, offset, len);
 			messageLength += offset;
 			len -= offset;
 		} while (hasMoreBytes(cbuf, offset, len, messageLength));
-		
 		return messageLength;
 	}
 	
@@ -38,8 +53,7 @@ public class Reader extends java.io.Reader {
 	public int readHeader(int off, int len) throws IOException {
 		char buffer[] = readBytes(off, len);
 		String stringPacketSize = new String(buffer, 0, Constants.HEADER_SIZE).trim();
-		int sizePacket = Integer.parseInt(stringPacketSize); 
-		return sizePacket;
+		return Integer.parseInt(stringPacketSize);
 	}
 	
 	public char[] readBytes(int off, int len) throws IOException {
