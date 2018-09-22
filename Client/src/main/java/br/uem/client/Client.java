@@ -51,7 +51,7 @@ public class Client implements ClientInterface, SenderReceiver {
 
 	@Override
 	public void runClient() throws InvalidComunicationStateException {
-		String message = "Tentando rodar no host:" + this.serverIp + ":" + this.serverPort + "-"
+		String message = "Tentando conectar-se ao host:" + this.serverIp + ":" + this.serverPort + "-"
 				+ this.clientState.getClass().getSimpleName();
 		logger.info(message);
 		clientState.runClient();
