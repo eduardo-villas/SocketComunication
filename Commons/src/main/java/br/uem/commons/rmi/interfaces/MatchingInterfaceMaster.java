@@ -1,9 +1,8 @@
 package br.uem.commons.rmi.interfaces;
-import java.rmi.*;
-import java.util.*;
-import java.lang.String;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 public interface MatchingInterfaceMaster extends Remote {     
-    public void result(String server, String option, long id_inicio, int carga, Hashtable<String,String> resultfinal) throws RemoteException, Exception;
+    public void result(String message) throws RemoteException, Exception;
 }
 
