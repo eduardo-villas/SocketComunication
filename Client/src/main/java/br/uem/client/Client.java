@@ -9,15 +9,13 @@ import java.net.Socket;
 
 import org.apache.log4j.Logger;
 
-import com.google.common.base.Preconditions;
-
 import br.uem.client.protocol.ClientState;
 import br.uem.client.protocol.ClientStoped;
 import br.uem.commons.comunication.ConnectionIsCloseException;
 import br.uem.commons.comunication.Constants;
 import br.uem.commons.comunication.InvalidComunicationStateException;
-import br.uem.commons.comunication.OperationRunner;
 import br.uem.commons.comunication.MyReader;
+import br.uem.commons.comunication.OperationRunner;
 import br.uem.commons.comunication.SenderReceiver;
 import br.uem.commons.comunication.Writer;
 

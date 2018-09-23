@@ -12,7 +12,6 @@ import com.google.gson.reflect.TypeToken;
 
 public class JSONUtilTest {
 
-	
 	@Test
 	public void testStringFromOject() throws Exception {
 		Map<String, String> map = new LinkedHashMap<>();
