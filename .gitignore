@@ -7,3 +7,7 @@ Client/bin/
 
 
 *.class
+
+Client/\.settings/org\.eclipse\.buildship\.core\.prefs
+
+Commons/\.settings/org\.eclipse\.buildship\.core\.prefs
