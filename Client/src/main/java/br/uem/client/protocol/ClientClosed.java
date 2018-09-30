@@ -6,10 +6,6 @@ import br.uem.commons.comunication.InvalidComunicationStateException;
 
 public class ClientClosed implements ClientState {
 
-	public ClientClosed() {
-
-	}
-
 	@Override
 	public void runClient() throws InvalidComunicationStateException {
 		throw new InvalidComunicationStateException("Cliente fechado. Impossível rodar o cliente.");

@@ -103,9 +103,6 @@ public class Client implements ClientInterface, SenderReceiver {
 			char buffer[] = this.inputMessage.readBytes(Constants.HEADER_SIZE, messageLength);
 			message = new String(buffer, 0, messageLength - Constants.HEADER_SIZE);
 
-			if (Constants.isGoodbye(message)) {
-				throw new ConnectionIsCloseException();
-			}
 		} catch (Exception e) {
 			if (!(e instanceof ConnectionIsCloseException)) {
 				logger.error("Erro ao ler a mensagen do sevidor.", e);

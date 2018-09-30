@@ -36,7 +36,7 @@ public class ServerReady implements ServerState {
 	public void doComunication() throws InvalidComunicationStateException, IOException {
 		try {
 			this.server.getOperationRunner().execute(this.server);
-			this.server.setState(new ServerSayGoodbye(this.server));
+			server.setState(new ServerSayGoodbye(server));
 		} catch (ConnectionIsCloseException e) {
 			this.server.setState(new ServerWaiting(this.server));
 			logger.error("Erro na execução da operação do servidor. A conexão foi fechada.", e);

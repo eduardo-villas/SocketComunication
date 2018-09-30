@@ -14,8 +14,9 @@ public class ServerSayGoodbye extends ServerGoodbye {
 
 	@Override
 	public void doComunication() throws InvalidComunicationStateException, IOException {
-		this.server.sendMessage(Constants.GOODBYE);
-		this.server.setState(new ServerHearsGoodbye(this.server));
+		server.sendMessage(Constants.GOODBYE);
+		server.closeResources();
+		server.setState(new ServerWaiting(server));
 	}
 
 }

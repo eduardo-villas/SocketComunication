@@ -18,8 +18,7 @@ public class ClientSayGoodbye extends ClientGoodBye {
 	@Override
 	public void doComunication() throws InvalidComunicationStateException, IOException {
 		this.client.sendMessage(Constants.GOODBYE);
-		this.client.closeResources();
-		this.client.setState(new ClientClosed());
+		this.client.setState(new ClientHearsGoodbye(client));
 	}
 
 }

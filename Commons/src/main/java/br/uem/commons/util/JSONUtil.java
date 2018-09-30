@@ -24,8 +24,8 @@ public class JSONUtil {
 		return gson.fromJson(jsonString, objectClass);
 	}
 
-	public static <T> T objectFromString(String jsonString, Type typeObjec) {
-		return gson.fromJson(jsonString, typeObjec);
+	public static <T> T objectFromString(String jsonString, Type typeObject) {
+		return gson.fromJson(jsonString, typeObject);
 	}
 	
 }

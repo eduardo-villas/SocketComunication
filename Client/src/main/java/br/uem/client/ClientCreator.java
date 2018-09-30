@@ -17,10 +17,10 @@ public class ClientCreator {
 		this.port = port;
 		this.operationRunner = operationRunner;
 	}
-	
+
 	public Client createClient() {
 
-		final Client client ;
+		final Client client;
 		try {
 			client = new Client(ip, port);
 		} catch (IOException ex) {
@@ -28,7 +28,6 @@ public class ClientCreator {
 			Logger.getLogger(ClientCreator.class).error(errorMessage, ex);
 			throw new RuntimeException(errorMessage, ex);
 		}
-
 
 		ClientRunner clientRunner = new ClientRunner(operationRunner);
 		clientRunner.runClient(client);

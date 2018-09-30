@@ -30,7 +30,8 @@ public class ClientReady implements ClientState {
 	@Override
 	public void doComunication() throws InvalidComunicationStateException, IOException {
 		try {
-			this.client.getOperationRunner().execute(this.client);
+			client.getOperationRunner().execute(this.client);
+			client.setState(new ClientSayGoodbye(client));
 		} catch (ConnectionIsCloseException e) {
 			logger.info("A conexao foi fechada pelo servidor");
 		} catch (Exception e) {
